@@ -42,16 +42,20 @@ export default new Router({
       component: PostsNew    },
     { path: '/posts/:id(\\d+)/edit',
       name: 'PostsEdit',
-      component: PostsEdit    },
+      component: PostsEdit ,
+      props:routes =>({
+        id: Number(routes.params.id)  //型をけっていできないので指定する
+      })},
       { path: '/user/login',  // :id は数値のみに制限する
       name: 'LoginForm',
       components: {//複数系にすると呼び出せる！！
-        login: LoginForm 
+        // login: LoginForm 
       } },
       { path: '/user/signup', 
       name: 'SignupForm',
       components: {
-        login: SignupForm 
+        // login: SignupForm 
+        default: SignupForm 
       } },
     
 

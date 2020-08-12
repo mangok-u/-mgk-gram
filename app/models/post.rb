@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   # include ActiveStorageSupport::SupportForBase64
-  validates :name, :text, presence: true
+  validates  :text, presence: true
   has_one_attached :mgk_image
   attr_accessor :image
   # attr_accessor :image

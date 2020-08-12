@@ -17,8 +17,9 @@
     </div>
     <div v-show="isTouched" @click="closeModal" class="modal-wrapper">
       <div class="modal">
-        <div class="modal-edit">
-          <a href="#">edit</a>
+        <div class="modal-edit">  
+           <!-- params入れたい時は名前付き</del> -->
+          <router-link :to="{ name: 'PostsEdit', params: { id: post.id }}">Edit</router-link>
         </div>
         <div @click="deletePost()" class="modal-delete">
           <a>delete</a>
@@ -63,7 +64,7 @@ export default {
           // this.updatePosts();
         })
     },
-    isTrue(){
+    isTrue(){  //電波防ぐためにある
       this.$emit('isTrue',true)
     },
     openModal(){

@@ -4,7 +4,7 @@
    
     <Header></Header>
     <router-view></router-view>
-      <LoginPage></LoginPage>
+  
    
   </div>
 

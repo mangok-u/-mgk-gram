@@ -33,15 +33,10 @@ export default{
   methods:{
     openDetail(){
       console.log('hoge')
-      //  document.getElementById('wrapper-mask').classList.add('fade-body')
-       document.querySelector('.profile-photos').classList.add('get-opacity')
-       document.getElementById('header').classList.add('get-opacity')
        this.isTouched=true;
     },
     closeDetail(){
       if(this.isTouched=true){
-       document.querySelector('.profile-photos').classList.remove('get-opacity')
-       document.getElementById('header').classList.remove('get-opacity')
        this.isTouched=false;
       }
     },
@@ -74,7 +69,7 @@ export default{
   left:0;
   width:100%;
   height:100%;
-  z-index:1;
+  z-index:9;
 }
 
 #photo-detail{

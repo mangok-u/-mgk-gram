@@ -1,5 +1,5 @@
 <template>
-<div class="post">
+<div class="posts-new">
   <posts-form :errors="errors"  :post="post" @submittt="createPost"></posts-form>
 </div>
 </template>
@@ -19,6 +19,12 @@ export default {
       errors: ''
     }
   },
+
+  mounted(){
+  
+    this.selectFile()
+      
+  },
   methods: {
     createPost: function() {
       axios
@@ -34,7 +40,11 @@ export default {
             this.errors = error.response.data.errors;
           }
         });
-    }
+    },
+    selectFile(){
+        var a = document.getElementById("select-file");
+        a.click();
+      }
   },
   components:{
     PostsForm
@@ -42,8 +52,10 @@ export default {
 }
 </script>
 
-<style scoped>
-.post{
+<style scoped lang="scss">
+.posts-new{
  padding-top:60px;
+ background: rgba(var(--b3f, 250, 250, 250), 1);
+ text-align:center;
 }
 </style>

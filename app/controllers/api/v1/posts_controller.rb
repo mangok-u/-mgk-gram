@@ -23,21 +23,26 @@ class Api::V1::PostsController < ApiController
 
   def create
    
-    post=Post.new(post_params)
+    @post=Post.new(post_params)
   
-    if post.save
-      post.parse_base64(params[:image])
+    if @post.save
+      @post.parse_base64(params[:image])
     
    
-      render json: post, staus: :created
+      render json: @post, staus: :created
     else
-      render json: { errors: post.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   def update
         # beforeアクション忘れでunpermitted
+   
     if @post.update_attributes(post_params)
+      # すでに保存されていると、data名でエラーが怒るので新たな画像来た時だけ
+      unless params[:image].include?("active_storage") 
+        @post.parse_base64(params[:image])
+      end
       head :no_content
     else
       render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
