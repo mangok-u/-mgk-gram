@@ -12,8 +12,8 @@
         <div class="form-box">
           <div class="form-box-img">
             <img  v-if="id >= 0" :src="post.image">
-            <img v-else :src="imgSrc">
-
+            <img v-else-if="imgSrc !==''" :src="imgSrc">
+              <!-- imgが無いときにから表示を防ぐ -->
             <div @click="selectFile">画像を更新する</div>
             <input  name="uploadedImage" type="file" accept="image/*" ref="file" placeholder="画像を更新する" v-on:change="onFileChange()" id="select-file">
           </div>
@@ -38,7 +38,7 @@ export default {
   props: {
     post: {},
     errors: '',
-    id:''
+    id:''  //idが飛んでいるかでnewかeditチェック
   },
   data(){
     return{
@@ -78,7 +78,7 @@ export default {
 .posts-form{
  background: white;
  width:400px;
- height:600px;
+ height:680px;
  margin:0 auto;
  border: 1px solid rgba(var(--b6a,219,219,219),1);
  padding:40px 0;
@@ -102,7 +102,7 @@ export default {
        margin-bottom:30px;
        img{
          width:100%;
-         height:auto;
+         height:250px;
          object-fit: cover;
          margin-bottom:20px;
        }
