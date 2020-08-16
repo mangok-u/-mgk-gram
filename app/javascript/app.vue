@@ -32,12 +32,7 @@ export default{
     // ProfileHeader,
     // ProfilePhotos
   },
-  mounted () {
-    axios
-      .get(`/api/v1/users/chech_login`)
-      .then(response => (this.user = response.data))
   
-   },
   
    
 }
