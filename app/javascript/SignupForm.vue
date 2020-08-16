@@ -55,29 +55,23 @@ export default{
   },
   methods:{
     submit: function() {
-      // axios
-       firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-      //   .post('/api/v1/auth', this.user)
-      //   .then(response => {
-      //     localStorage.setItem('access-token', response.headers['access-token'])
-      //       localStorage.setItem('client', response.headers.client)
-      //       localStorage.setItem('uid', response.headers.uid)
-      //       localStorage.setItem('token-type', response.headers['token-type'])
-      //       return response
-          // let e = response.data;
-          // console.log(response.data)
-          // this.$router.push({path: '/posts/new'});
-          //上記に遷移
-        // })
-        // .catch(error => {
-        //   // console.error(error);
-        //   // if (error.response.data && error.response.data.errors) {
-        //   //   this.errors = error.response.data.errors;
-        //   // }
-        // });
+       firebase
+        .auth()
+          .createUserWithEmailAndPassword(this.email, this.password)
+           .then(res => {
+            const user = {
+                  email: res.user.email,
+                  full_name: this.fullname,
+                  user_name:this.username,
+                  uid: res.user.uid,
+                  password: this.password
+                };
+                axios.post("/api/v1/users",{ user }).then(() => {
+                  this.$router.push("/");
+                });
+          })
+         }
     }
-  },
-
 }
 </script>
 

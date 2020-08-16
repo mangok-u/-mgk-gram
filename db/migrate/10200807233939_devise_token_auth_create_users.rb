@@ -29,10 +29,10 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       # t.datetime :locked_at
 
       ## User Info
-      t.string :fullname
-      t.string :username
-      # t.string :image
+      t.string :full_name
+      t.string :user_name
       t.string :email
+      # t.string :uid
 
       ## Tokens
       t.text :tokens
