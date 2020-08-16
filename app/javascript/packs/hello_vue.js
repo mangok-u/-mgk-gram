@@ -8,6 +8,20 @@
 import Vue from 'vue'
 import App from '../app.vue'
 import router from '../router.js'
+import firebase from 'firebase'
+import "firebase/auth";
+ //普通にnpminstall de行けた
+const config = {
+  apiKey: "AIzaSyDxmb4KQEh-naza2Dt-a48_jFwGf6UQDg8",
+    authDomain: "mgkgram.firebaseapp.com",
+    databaseURL: "https://mgkgram.firebaseio.com",
+    projectId: "mgkgram",
+    storageBucket: "mgkgram.appspot.com",
+    messagingSenderId: "567636004445",
+    appId: "1:567636004445:web:2520afdff18b8d7bf987b4"
+};
+ 
+firebase.initializeApp(config);
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({

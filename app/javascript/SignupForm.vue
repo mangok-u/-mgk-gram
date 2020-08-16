@@ -16,16 +16,16 @@
                 <div></div>
               </div>  
               <div class="signup-form-box-form-email">
-                <input type="email" v-model="user.email" placeholder="携帯電話番号またはメールアドレス" >
+                <input type="email" v-model="email" placeholder="携帯電話番号またはメールアドレス" >
               </div>
               <div class="signup-form-box-form-fullname">
-                <input type="text" v-model="user.fullname" placeholder="フルネーム" >
+                <input type="text" v-model="fullname" placeholder="フルネーム" >
               </div>
               <div class="signup-form-box-form-username">
-                <input type="text" v-model="user.username" placeholder="ユーザーネーム" >
+                <input type="text" v-model="username" placeholder="ユーザーネーム" >
               </div>
               <div class="signup-form-box-form-password">
-                <input type="password" v-model="user.password" placeholder="パスワード" >
+                <input type="password" v-model="password" placeholder="パスワード" >
               </div>
               <div class="signup-form-box-form-submit">
                 <button @click="submit" type="submit">登録する</button>
@@ -41,39 +41,40 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+//この記述！！！！
 import axios from 'axios';
 export default{
   data(){
     return{
-      user:{
         email:"",
         fullname:"",
         username:"",
         password:""
-      }
     }
   },
   methods:{
     submit: function() {
-      axios
-        .post('/api/v1/auth', this.user)
-        .then(response => {
-          localStorage.setItem('access-token', response.headers['access-token'])
-            localStorage.setItem('client', response.headers.client)
-            localStorage.setItem('uid', response.headers.uid)
-            localStorage.setItem('token-type', response.headers['token-type'])
-            return response
+      // axios
+       firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+      //   .post('/api/v1/auth', this.user)
+      //   .then(response => {
+      //     localStorage.setItem('access-token', response.headers['access-token'])
+      //       localStorage.setItem('client', response.headers.client)
+      //       localStorage.setItem('uid', response.headers.uid)
+      //       localStorage.setItem('token-type', response.headers['token-type'])
+      //       return response
           // let e = response.data;
           // console.log(response.data)
           // this.$router.push({path: '/posts/new'});
           //上記に遷移
-        })
-        .catch(error => {
-          // console.error(error);
-          // if (error.response.data && error.response.data.errors) {
-          //   this.errors = error.response.data.errors;
-          // }
-        });
+        // })
+        // .catch(error => {
+        //   // console.error(error);
+        //   // if (error.response.data && error.response.data.errors) {
+        //   //   this.errors = error.response.data.errors;
+        //   // }
+        // });
     }
   },
 
