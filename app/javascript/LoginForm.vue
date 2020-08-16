@@ -5,13 +5,13 @@
           <div class="login-form-box-form">
             <form >   
               <div class="login-form-box-form-email">
-                <input type="text">
+                <input v-model="email" type="text">
               </div>
               <div class="login-form-box-form-password">
-                <input type="text">
+                <input v-model="password" type="password">
               </div>
               <div class="login-form-box-form-submit">
-                <button type="submit">ログイン</button>
+                <button @click="login" type="submit">ログイン</button>
               </div>
               <div class="login-form-box-form-another">
                 <div></div>
@@ -32,7 +32,27 @@
 </template>
 
 <script>
+import firebase from 'firebase'
 export default{
+
+  data(){
+    return{
+      email:"",
+      password:""
+    }
+  },
+   methods: {
+    login: function () {
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+      .then(
+        // 成功時の処理
+        alert('Success!')
+      )
+      .catch(
+        // エラー時の処理 
+      )
+    }
+  }
 
 }
 </script>

@@ -49,7 +49,7 @@ export default new Router({
       { path: '/user/login',  // :id は数値のみに制限する
       name: 'LoginForm',
       components: {//複数系にすると呼び出せる！！
-        // login: LoginForm 
+        default: LoginForm 
       } },
       { path: '/user/signup', 
       name: 'SignupForm',
