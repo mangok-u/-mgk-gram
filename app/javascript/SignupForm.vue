@@ -67,7 +67,7 @@ export default{
                   password: this.password
                 };
                 axios.post("/api/v1/users",{ user }).then(() => {
-                  this.$router.push("/");
+                this.$router.push({path: '/'});
                 });
           })
          }

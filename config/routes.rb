@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   #   registrations: 'users/registrations',
   #   sessions: "users/sessions",
   # }
-  devise_for :users
+  # devise_for :users
   root to: 'home#index'
   # :<snip>
 
@@ -16,9 +16,9 @@ Rails.application.routes.draw do
           get "chech_login"
         end
       end
-      mount_devise_token_auth_for 'User', at: 'auth', controllers: {
-        registrations: 'api/v1/auth/registrations'
-       }
+      # mount_devise_token_auth_for 'User', at: 'auth', controllers: {
+      #   registrations: 'api/v1/auth/registrations'
+      #  }
 
     end
   end
