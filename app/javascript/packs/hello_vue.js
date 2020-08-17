@@ -11,7 +11,7 @@ import router from '../router.js'
 import firebase from 'firebase'
 import store from '../store';
 import "firebase/auth";
-import '../plugins'
+// import '../plugins'
 
  //普通にnpminstall de行けた
 const config = {
@@ -24,10 +24,10 @@ const config = {
     appId: "1:567636004445:web:2520afdff18b8d7bf987b4"
 };
 
-plugins: [
+// plugins: [
  
-  "/plugins/auth-check"
-],
+//   "/plugins/auth-check"
+// ],
  
 firebase.initializeApp(config);
 
