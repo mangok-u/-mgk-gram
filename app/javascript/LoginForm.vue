@@ -33,6 +33,8 @@
 
 <script>
 import firebase from 'firebase'
+import axios from 'axios';
+
 export default{
 
   data(){
@@ -40,6 +42,24 @@ export default{
       email:"",
       password:""
     }
+  },
+  created(){
+    console.log('hoge')
+    // let store=this.$store;
+    // const authCheck = ({store, redirect }) => {
+    firebase.auth().onAuthStateChanged(async user => {
+        if (user) {
+            const { data } = await axios.get(`api/v1/users?uid=${user.uid}`)
+            console.log("ログインしているユーザー:", data)
+            this.$store.commit("setUser", data)
+            const userr=this.$store.state.currentUser;
+            console.log(userr)
+        } else {
+            this.$store.commit("setUser", null)
+        }
+    });
+  //  }
+  //  authCheck();
   },
    methods: {
     login: function () {

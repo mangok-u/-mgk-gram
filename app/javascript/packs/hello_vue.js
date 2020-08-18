@@ -6,11 +6,13 @@
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
 
 import Vue from 'vue'
+import Vuex from 'vuex'
 import App from '../app.vue'
 import router from '../router.js'
 import firebase from 'firebase'
 import store from '../store';
 import "firebase/auth";
+
 // import '../plugins'
 
  //普通にnpminstall de行けた
@@ -24,6 +26,7 @@ const config = {
     appId: "1:567636004445:web:2520afdff18b8d7bf987b4"
 };
 
+Vue.use(Vuex);
 // plugins: [
  
 //   "/plugins/auth-check"
