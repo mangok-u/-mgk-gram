@@ -1,16 +1,16 @@
 import Vue from 'vue'
 
 import Router from 'vue-router'
-import Profile from 'Profile.vue'
+import Profile from './components/profiles/Profile.vue'
 
 
 
-import PostsDetail from 'PostsDetail.vue'
-import PostsNew from 'PostsNew.vue'
-import PostsEdit from 'PostsEdit.vue'
-import LoginForm from "LoginForm.vue"
+import PostsDetail from './components/posts/PostsDetail.vue'
+import PostsNew from './components/posts/PostsNew.vue'
+import PostsEdit from './components/posts/PostsEdit.vue'
+import LoginForm from "./components/sign/LoginForm.vue"
 import Photodetail from 'Photodetail.vue'
-import SignupForm  from "SignupForm.vue"
+import SignupForm  from "./components/sign/SignupForm.vue"
 
 
 

@@ -16,8 +16,8 @@
 import axios from 'axios';
 import firebase from 'firebase'
 import 'normalize.css'
-import Header from './Header.vue' 
-import LoginPage from './LoginPage.vue' 
+import Header from './components/globals/Header.vue' 
+import LoginPage from './components/sign/LoginPage.vue' 
 
 export default{
   data(){
