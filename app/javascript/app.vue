@@ -14,6 +14,7 @@
 
 <script>
 import axios from 'axios';
+import firebase from 'firebase'
 import 'normalize.css'
 import Header from './Header.vue' 
 import LoginPage from './LoginPage.vue' 
@@ -24,13 +25,22 @@ export default{
       user:{}
     }
   },
+  created(){
+    console.log('hoge')
+    
+    firebase.auth().onAuthStateChanged(async user => {
+        if (user) {
+            const { data } = await axios.get(`api/v1/users?uid=${user.uid}`)
+            console.log("ログインしているユーザー:", data)
+            this.$store.commit("setUser", data)
+        } else {
+            this.$store.commit("setUser", null)
+        }
+    });
+  },
   components:{
     LoginPage,
     Header
-
-    // ProfileIndex,
-    // ProfileHeader,
-    // ProfilePhotos
   },
   
   

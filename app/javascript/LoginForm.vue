@@ -43,34 +43,17 @@ export default{
       password:""
     }
   },
-  created(){
-    console.log('hoge')
-    // let store=this.$store;
-    // const authCheck = ({store, redirect }) => {
-    firebase.auth().onAuthStateChanged(async user => {
-        if (user) {
-            const { data } = await axios.get(`api/v1/users?uid=${user.uid}`)
-            console.log("ログインしているユーザー:", data)
-            this.$store.commit("setUser", data)
-            const userr=this.$store.state.currentUser;
-            console.log(userr)
-        } else {
-            this.$store.commit("setUser", null)
-        }
-    });
-  //  }
-  //  authCheck();
-  },
    methods: {
     login: function () {
-      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-      .then(
-        // 成功時の処理
-        alert('Success!')
-      )
-      .catch(
-        // エラー時の処理 
-      )
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(()=>{
+            //  this.$router.push("/");
+        })
+         .catch(err=>{
+            console.log(err)
+        })
     }
   }
 

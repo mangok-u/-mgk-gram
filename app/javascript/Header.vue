@@ -7,7 +7,7 @@
       </div>
       <ul class="header-right">
         <li class="header-right_icon" ><router-link to="/posts/new">post</router-link></li>
-        <li class="header-right_icon">#</li>
+        <li @click="logout" class="header-right_icon">Logout</li>
         <li class="header-right_icon">#</li>
         <li class="header-right_icon">#</li>
       </ul>
@@ -15,6 +15,21 @@
   </div>
 </template>
 
+<script>
+
+import firebase from 'firebase'
+import axios from 'axios';
+export default{
+
+methods:{
+  logout(){
+    firebase.auth().signOut()
+  }
+}
+
+}
+
+</script>
 
 <style scoped lang="scss">
 #header{
