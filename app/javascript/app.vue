@@ -1,11 +1,15 @@
 <template>
   <!-- <div v-if="this.user.id<=1" > -->
   <div id="app">
+
+    <template >
+      <router-view name="noAuth"></router-view>
+    </template>
    
-    <Header></Header>
-    <router-view></router-view>
-  
-   
+    <template >
+      <Header></Header>
+      <router-view></router-view>
+    </template>
   </div>
 
   <!-- <router-view v-else name="login"></router-view> -->
@@ -25,6 +29,20 @@ export default{
       user:{}
     }
   },
+  mounted(){
+    firebase.auth().onAuthStateChanged(async user => {
+        if (user) {
+            const { data } = await axios.get(`api/v1/users?uid=${user.uid}`)
+            console.log("ログインしているユーザー:", data)
+            this.$store.commit("setUser", data)
+            this.user=this.$store.state.currentUser
+            console.log(this.user)
+        } else {
+            this.$store.commit("setUser", null)
+        }
+    });
+
+  },
   created(){
     console.log('hoge')
     
@@ -33,6 +51,8 @@ export default{
             const { data } = await axios.get(`api/v1/users?uid=${user.uid}`)
             console.log("ログインしているユーザー:", data)
             this.$store.commit("setUser", data)
+            this.user=this.$store.state.currentUser
+            console.log(this.user)
         } else {
             this.$store.commit("setUser", null)
         }
