@@ -65,7 +65,8 @@ methods:{
     width:50%;
     &_name{
       font-size:2rem;
-      font-family:'Tahoma';
+       font-family:'Courier';
+       letter-spacing:0;
       // font-weight: bold;
     }
     }
