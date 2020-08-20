@@ -35,6 +35,7 @@ export default {
           //上記に遷移
         })
         .catch(error => {
+          console.log(this.$store.state.currentUser)
           console.error(error);
           if (error.response.data && error.response.data.errors) {
             this.errors = error.response.data.errors;
