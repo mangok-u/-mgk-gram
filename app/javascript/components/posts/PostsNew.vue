@@ -13,7 +13,8 @@ export default {
       post: {
         name: '',
         text:'',
-        image:''
+        image:'',
+        user_id:this.$store.state.currentUser.id
       },
     
       errors: ''
