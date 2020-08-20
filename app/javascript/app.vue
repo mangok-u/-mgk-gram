@@ -1,14 +1,14 @@
 <template>
   <!-- <div v-if="this.user.id<=1" > -->
   <div id="app">
-
-    <template >
-      <router-view name="noAuth"></router-view>
-    </template>
    
-    <template >
+    <template v-if="isLogin">
       <Header></Header>
       <router-view></router-view>
+    </template>
+
+    <template v-else>
+      <router-view name="noAuth"></router-view>
     </template>
   </div>
 
@@ -26,7 +26,8 @@ import LoginPage from './components/sign/LoginPage.vue'
 export default{
   data(){
     return{
-      user:{}
+      user:{},
+      isLogin:false
     }
   },
   mounted(){
@@ -36,9 +37,12 @@ export default{
             console.log("ログインしているユーザー:", data)
             this.$store.commit("setUser", data)
             this.user=this.$store.state.currentUser
+            this.isLogin=true;
             console.log(this.user)
         } else {
             this.$store.commit("setUser", null)
+            this.isLogin=false;
+            console.log(this.user)
         }
     });
 

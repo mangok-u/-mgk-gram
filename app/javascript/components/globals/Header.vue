@@ -23,7 +23,16 @@ export default{
 
 methods:{
   logout(){
-    firebase.auth().signOut()
+    firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$store.commit("setUser", null);
+          this.$router.push("/user/login");
+        })
+        .catch(error => {
+          console.log(error);
+        });
   }
 }
 
