@@ -4,7 +4,7 @@ class Api::V1::UsersController < ApiController
   def index
     if params[:uid] 
       @user = User.find_by(uid: params[:uid])
-      render json: @user
+      render json: @user, serializer: UserSerializer
     else 
       @users = User.all
       render json: @users

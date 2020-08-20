@@ -1,7 +1,7 @@
 if @posts.present?
   # json.posts do 
     json.array!(@posts) do |post| 
-      json.extract! post, :id, :name, :text
+      json.extract! post, :id, :user_id, :text
       json.image rails_blob_url(post.mgk_image) if post.mgk_image.attached?
     # end
   end

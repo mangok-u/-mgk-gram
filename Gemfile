@@ -60,3 +60,5 @@ gem 'rack-cors'
 gem 'pry-rails'
 gem 'mini_magick'
 gem "jbuilder", "~> 2.7"
+gem 'active_model_serializers'  
+# jsonよう

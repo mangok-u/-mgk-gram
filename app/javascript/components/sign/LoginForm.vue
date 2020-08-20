@@ -83,7 +83,7 @@ input{
       font-size:30px;
       padding-top:30px;
       margin-bottom:40px;
-      font-family:'Courier';
+       xz1font-family:'Courier';
       letter-spacing: 1;
     }
     &-form{

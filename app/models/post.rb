@@ -1,8 +1,10 @@
 class Post < ApplicationRecord
   # include ActiveStorageSupport::SupportForBase64
-  validates  :text, presence: true
+  belongs_to :user
+
   has_one_attached :mgk_image
   attr_accessor :image
+  validates  :text, presence: true
   # attr_accessor :image
 
   def parse_base64(image)

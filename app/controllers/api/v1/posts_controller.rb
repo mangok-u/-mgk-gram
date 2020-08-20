@@ -64,7 +64,7 @@ class Api::V1::PostsController < ApiController
 
     def post_params
       # params.fetch(:post, {}).permit(:name,:text,:image)
-      params.require(:post).permit(:name,:text,:image,:user_id)
+      params.require(:post).permit(:text,:image,:user_id)
        #  userパラメータがなかったときはActionController::ParameterMissingのエラーが起きるようになっています。
 # 上記の設定をしてあるとuserパラメータの代わりに{}がデフォルト値として評価されるようになります。
     end
