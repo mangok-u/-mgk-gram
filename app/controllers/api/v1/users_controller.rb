@@ -21,6 +21,19 @@ class Api::V1::UsersController < ApiController
     end
   end
 
+  def icon_update
+    @user=User.find(params[:id])
+  
+    if @user.update(user_params)
+      @user.parse_base64(params[:image])
+    
+   
+      render json: @user, staus: :created
+    else
+      render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
 
 
 
@@ -36,7 +49,7 @@ end
 
 private
   def user_params
-    params.require(:user).permit(:password,:email, :uid, :full_name,:user_name)
+    params.require(:user).permit(:password,:email, :uid, :full_name,:user_name,:image)
   end
 
 

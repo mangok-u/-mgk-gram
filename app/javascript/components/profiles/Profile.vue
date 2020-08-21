@@ -22,7 +22,7 @@ export default{
     ProfileHeader,
     ProfilePhotos
   },
-  mounted () {
+  beforeCreate () {
     axios
       .get(`/api/v1/users/${this.$store.state.currentUser.id}.json`)
       .then(response => (this.user = response.data ))

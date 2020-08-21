@@ -3,13 +3,17 @@
     <div class="profile-index">
       <div class="img-area">
         <div class="img-area-box">
-          <img class="img-area-box-img" src="/images/IMG_1406.jpg">
+          <img  class="img-area-box-img" src="/images/IMG_1406.jpg">
         </div>
+        <form @submit.prevent="updateIcon">
+          <input  name="uploadedImage" type="file" accept="image/*" ref="file"  v-on:change="onFileChange()" id="select-file">
+          <button type="submit">Commit</button>
+        </form>
       </div>
       <div class="detail-area">
         <div class="detail-area-name">
           <p>{{user.full_name}}</p>
-          <button>プロフィールを編集</button>
+          <button @click="selectFile">プロフィールを編集</button>
           <a href="#">$</a>
         </div>
         <div class="detail-area-number">
@@ -34,6 +38,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default{
 
 // 型定義しておかんとlength使えない
@@ -47,20 +52,50 @@ export default{
   data(){
   // const postsLength=this.user.posts.length;
     return{
-      userr:this.user
+      uploadedImage:'',
+      // imgSrc:''
     //  postsLength:postsLength
     }
   },
-  methods:{
-    show(){
-      console.log(this.userr)
+ methods: {
+    updateIcon() {
+      axios
+        .patch(`/api/v1/users/${this.user.id}/icon_update`, this.user)
+        .then(response => {
+          let e = response.data;
+          this.$router.push({path: '/'});
+          //上記に遷移
+        })
+        .catch(error => {
+          console.error(error);
+          if (error.response.data && error.response.data.errors) {
+            this.errors = error.response.data.errors;
+          }
+        });
+    },
+      onFileChange() {
+        let file = event.target.files[0] || event.dataTransfer.files
+        // this.imgSrc=URL.createObjectURL(file);
+        let reader = new FileReader()
+
+          reader.onload = () => {
+            
+              this.uploadedImage = event.target.result
+              this.user.image = this.uploadedImage
+            }
+          reader.readAsDataURL(file)
+          },
+      selectFile(){
+        var a = document.getElementById("select-file");
+        a.click();
       
+      }
     }
   }
 
 
 
-}
+
 </script>
 <style scoped lang="scss">
 
