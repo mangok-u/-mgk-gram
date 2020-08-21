@@ -8,17 +8,17 @@
       </div>
       <div class="detail-area">
         <div class="detail-area-name">
-          <p >run_goku</p>
+          <p>{{user.full_name}}</p>
           <button>プロフィールを編集</button>
           <a href="#">$</a>
         </div>
         <div class="detail-area-number">
-          <p>投稿129件</p>
-          <p>フォロワー330人</p>
+          <p>投稿{{user.posts.length}}</p>
+          <p @click="show">フォロワー330人</p>
           <p>フォロー中314人</p>
         </div>
         <div class="detail-area-intro">
-          <p class="detail-area-intro-name">Näoki. 満極</p>
+          <p class="detail-area-intro-name">{{user.user_name}}</p>
           <p class="detail-area-intro-text">
             runnning
             -
@@ -36,6 +36,30 @@
 
 <script>
 export default{
+
+// 型定義しておかんとlength使えない
+  props:{
+    user:{
+     full_name:String,
+     user_name:String,
+     posts:Array
+    }
+  },
+  data(){
+  // const postsLength=this.user.posts.length;
+    return{
+      userr:this.user
+    //  postsLength:postsLength
+    }
+  },
+  methods:{
+    show(){
+      console.log(this.userr)
+      
+    }
+  }
+
+
 
 }
 </script>
