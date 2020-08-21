@@ -3,11 +3,12 @@
     <div class="profile-index">
       <div class="img-area">
         <div class="img-area-box">
-          <img  class="img-area-box-img" src="/images/IMG_1406.jpg">
+          <img  v-if="user.image==null" class="img-area-box-img" src="/images/IMG_1406.jpg">
+          <img  v-else class="img-area-box-img" :src="user.image">
         </div>
         <form @submit.prevent="updateIcon">
           <input  name="uploadedImage" type="file" accept="image/*" ref="file"  v-on:change="onFileChange()" id="select-file">
-          <button type="submit">Commit</button>
+          <button v-if="isTouched" type="submit">Commit</button>
         </form>
       </div>
       <div class="detail-area">
@@ -53,7 +54,7 @@ export default{
   // const postsLength=this.user.posts.length;
     return{
       uploadedImage:'',
-      // imgSrc:''
+      isTouched:false
     //  postsLength:postsLength
     }
   },
@@ -63,7 +64,9 @@ export default{
         .patch(`/api/v1/users/${this.user.id}/icon_update`, this.user)
         .then(response => {
           let e = response.data;
-          this.$router.push({path: '/'});
+          this.isTouched=false;
+          // this.imgSrc=e.image
+          // this.$router.push({path: '/'});
           //上記に遷移
         })
         .catch(error => {
@@ -88,6 +91,7 @@ export default{
       selectFile(){
         var a = document.getElementById("select-file");
         a.click();
+        this.isTouched=true;
       
       }
     }
@@ -98,6 +102,10 @@ export default{
 
 </script>
 <style scoped lang="scss">
+
+#select-file{
+         display: none;
+       }
 
 #profile-index{
   padding-top:60px;
@@ -115,16 +123,25 @@ export default{
    display: flex;
    .img-area{
      width:40%;
+     position:relative;
     &-box{
       width:200px;
       height:200px;
       margin:0 auto;
+      text-align: center;
       &-img{
       width:150px;
       height:150px;
       border-radius: 50%;
       object-fit: cover;
       }
+    }
+    button{
+      position:absolute;
+      bottom:100px;
+      right:0;
+      left:0;
+      margin:0 auto;
     }
    }
    .detail-area{
