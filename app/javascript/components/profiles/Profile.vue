@@ -2,7 +2,7 @@
   <div>
     <ProfileIndex :user="user"></ProfileIndex>
     <ProfileHeader></ProfileHeader>
-    <ProfilePhotos></ProfilePhotos>
+    <ProfilePhotos :user="user"></ProfilePhotos>
   </div>
 </template>
 <script>
@@ -14,7 +14,7 @@ import ProfilePhotos from './ProfilePhotos.vue'
 export default{
   data(){
     return{
-      user:{}
+      user:{},
     }
   },
   components:{
@@ -25,7 +25,7 @@ export default{
   mounted () {
     axios
       .get(`/api/v1/users/${this.$store.state.currentUser.id}.json`)
-      .then(response => (this.user = response.data))
+      .then(response => (this.user = response.data ))
    }
 }
 </script>

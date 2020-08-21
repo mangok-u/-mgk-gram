@@ -14,7 +14,7 @@
         </div>
         <div class="detail-area-number">
           <p>投稿{{user.posts.length}}</p>
-          <p @click="show">フォロワー330人</p>
+          <p >フォロワー330人</p>
           <p>フォロー中314人</p>
         </div>
         <div class="detail-area-intro">

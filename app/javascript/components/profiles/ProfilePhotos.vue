@@ -1,7 +1,7 @@
 <template>
-  <div id="profile-photos">
+  <div  id="profile-photos">
     <div class="profile-photos">
-      <div class="photo-box" v-for="post in posts" :key="post.id">
+      <div class="photo-box" v-for="post in user.posts" :key="post.id">
          <router-link  :to="{ name: 'Photodetail', params: { id: post.id } }"><img @click="openDetail" :src="post.image" ></router-link>
       </div>  
     </div>
@@ -13,24 +13,33 @@
 <script>
 import axios from 'axios';
 export default{
+
+   props:{
+     user:{
+       posts:Array,
+       id:Number
+     }
+   },
   data(){
     return{
-      posts:[],
+      // posts:[],
+  
       isTouched:false
     }
   },
-  mounted(){
-    axios
-      .get('/api/v1/posts.json')
-      .then(response => (this.posts = response.data))
-      //jsonをデーター型に合わせるのが鍵
-  },
-  beforeUpdate(){
-    axios
-      .get('/api/v1/posts.json')
-      .then(response => (this.posts = response.data))
-  },
+  // mounted(){
+  //   axios
+  //     .get('/api/v1/posts.json')
+  //     .then(response => (this.posts = response.data))
+  //     //jsonをデーター型に合わせるのが鍵
+  // },
+  // beforeUpdate(){
+  //   axios
+  //     .get('/api/v1/posts.json')
+  //     .then(response => (this.posts = response.data))
+  // },
   methods:{
+   
     openDetail(){
       console.log('hoge')
        this.isTouched=true;
@@ -59,6 +68,7 @@ export default{
 }
 #profile-photos{
   width:100%;
+  height:200px;
   
 }
 #wrapper-mask{
