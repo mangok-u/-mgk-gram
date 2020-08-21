@@ -12,17 +12,19 @@ class Api::V1::PostsController < ApiController
     @posts = Post.with_attached_mgk_image.order(id: "desc")
 
     
-   
+    # render json: @user, serializer: UserSerializer
     render 'index', formats: :json, handlers: 'jbuilder'
     # シンボル！！！！！！！
   end
 
   def show
-    render 'show', formats: :json, handlers: 'jbuilder'
+   
+    render json: @post, serializer: PostSerializer
+    # render 'show', formats: :json, handlers: 'jbuilder'
   end
 
   def create
-   binding.pry
+   
     @post=Post.new(post_params)
   
     if @post.save

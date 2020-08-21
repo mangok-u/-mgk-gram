@@ -49,11 +49,11 @@ export default {
       .get(`/api/v1/posts/${this.$route.params.id}.json`)
       .then(response => (this.post = response.data))
   },
-  // beforeUpdate(){
-  //    axios
-  //     .get(`/api/v1/posts/${this.$route.params.id}.json`)
-  //     .then(response => (this.post = response.data))
-  // },
+  beforeUpdate(){
+     axios
+      .get(`/api/v1/posts/${this.$route.params.id}.json`)
+      .then(response => (this.post = response.data))
+  },
   methods:{
     deletePost(){
       axios

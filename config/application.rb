@@ -10,6 +10,10 @@ module Mgkgram
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
+    
+    # Rails.application.configure do
+    #   config.paths.add "app/serializers/concerns", eager_load: true
+    # end
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
