@@ -11,7 +11,13 @@ Rails.application.routes.draw do
   namespace :api, {format: 'json'} do
     namespace :v1 do
       resources :posts, only: [:index, :show, :create, :update,:destroy]
-      resources :users 
+      resources :users do
+        member do
+          patch "icon_update"
+        
+        end
+
+      end
       resources :profiles 
       
       

@@ -20,13 +20,12 @@
         <div class="detail-area-intro">
           <p class="detail-area-intro-name">{{user.user_name}}</p>
           <p class="detail-area-intro-text">
-            runnning
-            -
-            nigata-tokyo
-            -
-            Target time in 2020【2°45:00】
-            Full in 2019【2°59:27】
-            10K in 2019【36:54】
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+            ed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+            ed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
           </p>
         </div>
       </div>

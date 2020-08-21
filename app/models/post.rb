@@ -32,7 +32,7 @@ class Post < ApplicationRecord
   end
 
   def attach_image(filename)
-    mgk_image.attach(io: File.open("#{Rails.root}/tmp/#{filename}"), filename: filename)
+    icon.attach(io: File.open("#{Rails.root}/tmp/#{filename}"), filename: filename)
     FileUtils.rm("#{Rails.root}/tmp/#{filename}")
   end
 end
