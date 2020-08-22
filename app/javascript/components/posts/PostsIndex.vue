@@ -36,10 +36,18 @@ export default {
 #posts-index{
  padding-top:60px;
  background: rgba(var(--b3f, 250, 250, 250), 1);
- text-align:center;
- height:100vh;
+//  text-align:center;
+ 
 }
 .posts-index{
   padding-top:40px;
+  &-area{
+    width:80%;
+    max-width:650px;
+    margin:0 auto;
+    &-box{
+      width:100%;
+    }
+  }
 }
 </style>
