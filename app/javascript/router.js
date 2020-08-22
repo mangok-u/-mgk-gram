@@ -19,7 +19,11 @@ import LoginPage  from "./components/sign/LoginPage.vue"
 Vue.use(Router)
 const router = new Router({
   routes: [
+
     { path: '/',
+    name: 'PostsIndex',
+    component: PostsIndex    },
+    { path: '/profile:id(\\d+)',
       components:{
         default:Profile 
         // login: LoginForm 
@@ -36,9 +40,7 @@ const router = new Router({
 
     ]  
   },
-    { path: '/posts/index',
-      name: 'PostsIndex',
-      component: PostsIndex    },
+   
     // { path: '/posts/:id(\\d+)',  // :id は数値のみに制限する
     //   name: 'PostsDetail',
     //   component: PostsDetail  },
