@@ -11,8 +11,8 @@ class PostSerializer < ActiveModel::Serializer
   belongs_to :user
 
 
-def image
- url_for(object.mgk_image) if object.mgk_image.attached?
-end
+    def image
+    url_for(object.mgk_image) if object.mgk_image.attached?
+    end
 
 end
