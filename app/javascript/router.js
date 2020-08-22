@@ -8,6 +8,7 @@ import Profile from './components/profiles/Profile.vue'
 import PostsDetail from './components/posts/PostsDetail.vue'
 import PostsNew from './components/posts/PostsNew.vue'
 import PostsEdit from './components/posts/PostsEdit.vue'
+import PostsIndex from './components/posts/PostsIndex.vue'
 import LoginForm from "./components/sign/LoginForm.vue"
 import Photodetail from 'Photodetail.vue'
 import SignupForm  from "./components/sign/SignupForm.vue"
@@ -35,6 +36,9 @@ const router = new Router({
 
     ]  
   },
+    { path: '/posts/index',
+      name: 'PostsIndex',
+      component: PostsIndex    },
     { path: '/posts/:id(\\d+)',  // :id は数値のみに制限する
       name: 'PostsDetail',
       component: PostsDetail  },

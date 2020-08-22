@@ -34,12 +34,10 @@ export default {
 }
 </script>
 
-<style scoped>
-#post-index{
-
-}
-p {
-  font-size: 2em;
-  text-align: center;
+<style scoped lang="scss">
+.posts-new{
+ padding-top:60px;
+ background: rgba(var(--b3f, 250, 250, 250), 1);
+ text-align:center;
 }
 </style>

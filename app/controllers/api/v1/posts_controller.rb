@@ -12,8 +12,8 @@ class Api::V1::PostsController < ApiController
     @posts = Post.with_attached_mgk_image.order(id: "desc")
 
     
-    # render json: @user, serializer: UserSerializer
-    render 'index', formats: :json, handlers: 'jbuilder'
+    render json: @posts, serializer: UserSerializer
+    # render 'index', formats: :json, handlers: 'jbuilder'
     # シンボル！！！！！！！
   end
 
