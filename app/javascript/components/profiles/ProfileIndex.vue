@@ -3,7 +3,7 @@
     <div class="profile-index">
       <div class="img-area">
         <div class="img-area-box">
-          <img  v-if="user.image==null" class="img-area-box-img" src="/images/IMG_1406.jpg">
+          <img  v-if="user.image==null" class="img-area-box-img" src="/images/damy.jpg">
           <img  v-else class="img-area-box-img" :src="user.image">
         </div>
         <form @submit.prevent="updateIcon">
