@@ -5,7 +5,7 @@ import firebase from 'firebase'
 
 
 import Profile from './components/profiles/Profile.vue'
-import PostsDetail from './components/posts/PostsDetail.vue'
+// import PostsDetail from './components/posts/PostsDetail.vue'
 import PostsNew from './components/posts/PostsNew.vue'
 import PostsEdit from './components/posts/PostsEdit.vue'
 import PostsIndex from './components/posts/PostsIndex.vue'
@@ -39,9 +39,9 @@ const router = new Router({
     { path: '/posts/index',
       name: 'PostsIndex',
       component: PostsIndex    },
-    { path: '/posts/:id(\\d+)',  // :id は数値のみに制限する
-      name: 'PostsDetail',
-      component: PostsDetail  },
+    // { path: '/posts/:id(\\d+)',  // :id は数値のみに制限する
+    //   name: 'PostsDetail',
+    //   component: PostsDetail  },
     { path: '/posts/new',
       name: 'PostsNew',
       component: PostsNew    },

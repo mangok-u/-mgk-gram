@@ -4,7 +4,7 @@
     <dt>ID</dt>
     <dd>{{ post.id }}</dd>
     <dt>Name</dt>
-    <dd>{{ post.name }}</dd>
+    <dd>{{ post.text }}</dd>
   </dl>
   <!-- <button@click="deletePost">kk</button@click=> -->
 </div>
@@ -14,26 +14,29 @@
 import axios from 'axios';
 
 export default {
-  
-  data: function () {
-    return {
-      post: {}
-    }
-  },
-  mounted () {
+   
+   props:{
+     id:Number
+   },
+   data(){
+     return{
+       post:{}
+     }
+   },
+  mounted() {
     axios
-      .get(`/api/v1/posts/${this.$route.params.id}.json`)
+      .get(`/api/v1/posts/${this.id}.json`)
       .then(response => (this.post = response.data))
   },
   methods:{
-    deletePost(){
-      axios
-       .delete(`/api/v1/posts/${this.$route.params.id}`)
-        .then(response => {
-           this.$router.push({path: '/'});
-          // this.updatePosts();
-        })
-    },
+    // deletePost(){
+    //   axios
+    //    .delete(`/api/v1/posts/${this.$route.params.id}`)
+    //     .then(response => {
+    //        this.$router.push({path: '/'});
+    //       // this.updatePosts();
+    //     })
+    // },
     //  updatePosts: function() {
     //   axios
     //     .get(`/api/v1/posts/${this.$route.params.id}.json`)
