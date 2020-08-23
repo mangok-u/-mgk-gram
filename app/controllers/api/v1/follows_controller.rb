@@ -5,6 +5,7 @@ class Api::V1::FollowsController < ApiController
     following=User.find(follow_params[:following_id])
     follower=User.find(follow_params[:follower_id])
     if @follwe.save
+      # increment便利すぎ！！！！！！
       following.increment!(:following, 1)
       follower.increment!(:follower, 1)
 

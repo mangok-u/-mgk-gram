@@ -20,8 +20,8 @@
         </div>
         <div class="detail-area-number">
           <p>投稿{{user.posts.length}}</p>
-          <p >フォロワー330人</p>
-          <p>フォロー中314人</p>
+          <p >フォロワー{{user.follower}}人</p>
+          <p>フォロー中{{user.following}}人</p>
         </div>
         <div class="detail-area-intro">
           <p class="detail-area-intro-name">{{user.user_name}}</p>
@@ -48,7 +48,13 @@ export default{
     user:{
      full_name:String,
      user_name:String,
-     posts:Array
+     follower:Number,
+     following:Number,
+     posts:Array,
+     followw:{
+       follower_id:Number,
+       follower_id:Number
+     }
     }
   },
   data(){
@@ -69,6 +75,7 @@ export default{
           .post(`/api/v1/follows`, {follow})
           .then(response => {
             console.log('follow')
+            this.follower+=1;
           })
           .catch(error => {
             console.error(error);
