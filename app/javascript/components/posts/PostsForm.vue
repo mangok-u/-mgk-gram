@@ -20,7 +20,7 @@
           <div class="form-box-text">
              <textarea   v-model="post.text"
                          cols="40" rows="10" 
-                         maxlength="20" 
+                         maxlength="300" 
                          placeholder="キャプションを入力">
              </textarea>
           </div>

@@ -31,7 +31,15 @@
       <p>100人がいいねしました</p>
     </div>
     <div class="posts-detail-text">
-
+      <div class="post-detail-text-box">
+        <p class="posts-detail-text-box-user">
+          {{user.user_name}}
+        </p>
+        <p class="posts-detail-text-box-text" v-for="(text,index) in restText" :key="index">
+          {{text}}
+         
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -46,8 +54,8 @@ export default {
    },
    data(){
      return{
-       post:{},
-       user:{}
+       post:{text:''},   //オプションで使う値はすべて先に定義
+       user:{},
      }
    },
   mounted() {
@@ -57,6 +65,18 @@ export default {
         this.post = response.data
         this.user = this.post.user
       })
+  },
+  computed:{
+    firstText(){
+       let textArray= this.post.text.split(/\r\n|\r|\n/);
+       return textArray[0];
+    },
+    restText(){
+      let textArray= this.post.text.split(/\r\n|\r|\n/);  //shift使うと返り血が消えた値になる
+      let restArray=textArray.filter((item, index) => index !== 0);
+      return restArray;
+
+    }
   },
   methods:{
     // deletePost(){
@@ -145,6 +165,16 @@ export default {
       height:30px;
       margin:0 auto;
       line-height:30px;
+    }
+    &-text{
+      width:95%;
+      margin:0 auto;
+      &-box{
+        &-text{
+          //  white-space: pre-line;
+        }
+        
+      }
     }
   }
 </style>
