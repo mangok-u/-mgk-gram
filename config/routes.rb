@@ -14,11 +14,9 @@ Rails.application.routes.draw do
       resources :users do
         member do
           patch "icon_update"
-        
         end
-
       end
-      resources :profiles 
+      resources :posts, only: [:create, :destroy]
       
       
       # mount_devise_token_auth_for 'User', at: 'auth', controllers: {
