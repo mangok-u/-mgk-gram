@@ -31,15 +31,20 @@
       <p>100人がいいねしました</p>
     </div>
     <div class="posts-detail-text">
-      <div class="post-detail-text-box">
+      <div class="posts-detail-text-box">
         <p class="posts-detail-text-box-user">
           {{user.user_name}}
         </p>
-        <p class="posts-detail-text-box-text" v-for="(text,index) in restText" :key="index">
-          {{text}}
-         
+        <p class="posts-detail-text-box-text">
+          {{firstText}}
         </p>
+        <p class="posts-detail-text-box-next" @click="showNext">続きを読む</p>
       </div>
+      <template v-if="isNext">
+        <p class="posts-detail-text-box-all"  v-for="(text,index) in restText" :key="index">
+          {{text}}
+        </p>
+      </template>
     </div>
   </div>
 </template>
@@ -56,6 +61,7 @@ export default {
      return{
        post:{text:''},   //オプションで使う値はすべて先に定義
        user:{},
+       isNext:false
      }
    },
   mounted() {
@@ -68,30 +74,20 @@ export default {
   },
   computed:{
     firstText(){
-       let textArray= this.post.text.split(/\r\n|\r|\n/);
-       return textArray[0];
+      let textArray= this.post.text.split(/\r\n|\r|\n/);
+      return textArray[0];
     },
     restText(){
       let textArray= this.post.text.split(/\r\n|\r|\n/);  //shift使うと返り血が消えた値になる
       let restArray=textArray.filter((item, index) => index !== 0);
       return restArray;
-
     }
   },
   methods:{
-    // deletePost(){
-    //   axios
-    //    .delete(`/api/v1/posts/${this.$route.params.id}`)
-    //     .then(response => {
-    //        this.$router.push({path: '/'});
-    //       // this.updatePosts();
-    //     })
-    // },
-    //  updatePosts: function() {
-    //   axios
-    //     .get(`/api/v1/posts/${this.$route.params.id}.json`)
-    //     .then(response => (this.post = response.data))
-    // }
+    showNext(event){
+      this.isNext=true;
+      event.target.remove();
+    }
   }
 }
 </script>
@@ -101,6 +97,7 @@ export default {
     width:100%;
     border: 1px solid rgba(var(--b6a,219,219,219),1);
     margin-bottom:50px;
+    padding-bottom:20px;
     background:white;
     &-header{
       width:95%;
@@ -170,8 +167,17 @@ export default {
       width:95%;
       margin:0 auto;
       &-box{
+        display:flex;
+        &-user{
+          font-weight: bold;
+          margin-right:5px
+        }
         &-text{
-          //  white-space: pre-line;
+          margin-right:5px
+        }
+        &-next{
+          color: rgba(var(--f52,142,142,142),1);
+          margin-right:5px
         }
         
       }
