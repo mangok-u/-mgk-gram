@@ -12,6 +12,9 @@ import ProfileIndex from './ProfileIndex.vue'
 import ProfileHeader from './ProfileHeader.vue' 
 import ProfilePhotos from './ProfilePhotos.vue' 
 export default{
+  props:{
+    id:Number
+  },
   data(){
     return{
       user:{},
@@ -22,9 +25,9 @@ export default{
     ProfileHeader,
     ProfilePhotos
   },
-  beforeCreate () {
+  mounted () {
     axios
-      .get(`/api/v1/users/${this.$store.state.currentUser.id}.json`)
+      .get(`/api/v1/users/${this.id}.json`)
       .then(response => (this.user = response.data ))
    }
 }

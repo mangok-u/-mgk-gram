@@ -28,18 +28,24 @@ const router = new Router({
         default:Profile 
         // login: LoginForm 
       },
-    children:[
-      {
-        path: 'photo/:id(\\d+)',
-        name:'Photodetail',
-        components:{
-          profile: Photodetail,
-        },
+    // children:[
+    //   {
+    //     path: 'photo/:id(\\d+)',
+    //     name:'Photodetail',
+    //     components:{
+    //       profile: Photodetail,
+    //     },
        
-      }
+    //   }
 
-    ]  
+    // ]  
   },
+  { path: '/profile/:id(\\d+)',
+      name: 'Profile',
+      component: Profile ,
+      props:routes =>({
+        id: Number(routes.params.id)  //型をけっていできないので指定する
+      })},
    
     // { path: '/posts/:id(\\d+)',  // :id は数値のみに制限する
     //   name: 'PostsDetail',

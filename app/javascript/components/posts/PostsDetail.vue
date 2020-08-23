@@ -7,7 +7,9 @@
           <img v-else class="posts-detail-header-left-icon" src="/images/damy.jpg">
         </p> 
         <p class="posts-detail-header-left-name">
-          {{user.user_name}}
+          <router-link :to="{ name: 'Profile', params: { id: user.id } } ">
+            {{user.user_name}}
+          </router-link>
         </p>
       </div>
       <div class="posts-detail-header-right">
@@ -32,9 +34,11 @@
     </div>
     <div class="posts-detail-text">
       <div class="posts-detail-text-box">
-        <p class="posts-detail-text-box-user">
+        <!-- <p class="posts-detail-text-box-user"> -->
+        <router-link :to="{ name: 'Profile', params: { id: user.id } } ">
           {{user.user_name}}
-        </p>
+        </router-link>
+        <!-- </p> -->
         <p class="posts-detail-text-box-text">
           {{firstText}}
         </p>
@@ -168,7 +172,7 @@ export default {
       margin:0 auto;
       &-box{
         display:flex;
-        &-user{
+        a{
           font-weight: bold;
           margin-right:5px
         }
