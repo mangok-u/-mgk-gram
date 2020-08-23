@@ -16,7 +16,7 @@ Rails.application.routes.draw do
           patch "icon_update"
         end
       end
-      resources :posts, only: [:create, :destroy]
+      resources :follows, only: [:create, :destroy]
       
       
       # mount_devise_token_auth_for 'User', at: 'auth', controllers: {

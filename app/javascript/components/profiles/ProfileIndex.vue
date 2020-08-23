@@ -15,6 +15,7 @@
         <div class="detail-area-name">
           <p>{{user.full_name}}</p>
           <button v-if="user.id==currentUser.id" @click="selectFile">プロフィールを編集</button>
+          <button v-else @click="follow">follow</button>
           <a href="#">$</a>
         </div>
         <div class="detail-area-number">
@@ -59,15 +60,29 @@ export default{
     }
   },
  methods: {
+   follow() {
+     const follow = {
+                  following_id: this.currentUser.id,
+                  follower_id: this.user.id,
+                };
+        axios
+          .post(`/api/v1/follows`, {follow})
+          .then(response => {
+            console.log('follow')
+          })
+          .catch(error => {
+            console.error(error);
+            if (error.response.data && error.response.data.errors) {
+              this.errors = error.response.data.errors;
+            }
+          });
+    },
     updateIcon() {
       axios
         .patch(`/api/v1/users/${this.user.id}/icon_update`, this.user)
         .then(response => {
           let e = response.data;
           this.isTouched=false;
-          // this.imgSrc=e.image
-          // this.$router.push({path: '/'});
-          //上記に遷移
         })
         .catch(error => {
           console.error(error);
