@@ -43,7 +43,7 @@ export default {
   padding-top:40px;
   &-area{
     width:80%;
-    max-width:650px;
+    max-width:600px;
     margin:0 auto;
     &-box{
       width:100%;

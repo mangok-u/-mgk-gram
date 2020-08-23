@@ -3,7 +3,7 @@
     <div class="posts-detail-header">
       <div class="posts-detail-header-left">
         <p>
-          <img v-if="post.image!=null" class="posts-detail-header-left-icon" :src="post.image">
+          <img v-if="user.image!=null" class="posts-detail-header-left-icon" :src="user.image">
           <img v-else class="posts-detail-header-left-icon" src="/images/damy.jpg">
         </p> 
         <p class="posts-detail-header-left-name">
@@ -13,18 +13,24 @@
       <div class="posts-detail-header-right">
         •••
       </div>
-
     </div>
     <div class="posts-detail-image">
-
+      <img :src="post.image">
     </div>
     <div class="posts-detail-action">
-
+      <div class="posts-detail-action-left">
+        <p>$</p>
+        <p>$</p>
+        <p>$</p>
+      </div>
+      <div class="posts-detail-action-right">
+        <p>$</p>
+      </div>
+    </div>
+    <div class="posts-detail-like">
+      <p>100人がいいねしました</p>
     </div>
     <div class="posts-detail-text">
-
-    </div>
-    <div class="posts-detail-comment">
 
     </div>
   </div>
@@ -73,7 +79,6 @@ export default {
 <style scoped lang="scss">
   .posts-detail{
     width:100%;
-    height:500px;
     border: 1px solid rgba(var(--b6a,219,219,219),1);
     margin-bottom:50px;
     background:white;
@@ -103,6 +108,43 @@ export default {
         width:20%;
         text-align: right;
       }
+    }
+    &-image{
+      width:100%;
+      img{
+        width:100%;
+        height:550px;
+        object-fit: cover;
+      }
+    }
+    &-action{
+      width:95%;
+      height:40px;
+      margin:0 auto;
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      &-left{
+        width:60%;
+        display:flex;
+        p{
+          margin-right:15px;
+          font-size:1.6rem
+        }
+      }
+      &-right{
+        width:40%;
+        text-align:right;
+        p{
+          font-size:1.6rem
+        }
+      }
+    }
+    &-like{
+      width:95%;
+      height:30px;
+      margin:0 auto;
+      line-height:30px;
     }
   }
 </style>
