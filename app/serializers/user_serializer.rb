@@ -8,7 +8,7 @@ class UserSerializer < ActiveModel::Serializer
   attributes :id,:full_name,:user_name,:uid,:image
   # has_many :posts, serializer: PostSerializer
   has_many :posts do
-    object.posts.with_attached_mgk_image
+    object.posts.with_attached_mgk_image.order(id: "desc")
   end
 
 

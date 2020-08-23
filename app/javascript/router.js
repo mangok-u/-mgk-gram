@@ -23,29 +23,29 @@ const router = new Router({
     { path: '/',
     name: 'PostsIndex',
     component: PostsIndex    },
-    { path: '/profile:id(\\d+)',
-      components:{
-        default:Profile 
-        // login: LoginForm 
+  //   { path: '/profile:id(\\d+)',
+  //     components:{
+  //       default:Profile 
+  //       // login: LoginForm 
+  //     },
+    
+  // },
+    { path: '/profile/:id(\\d+)',
+        name: 'Profile',
+        component: Profile ,
+        props:routes =>({
+          id: Number(routes.params.id)  //型をけっていできないので指定する
+        }),
+        children:[
+          {
+            path: 'photo/:id(\\d+)',
+            name:'Photodetail',
+            components:{
+              profile: Photodetail,
+            },
+          }
+        ]  
       },
-    // children:[
-    //   {
-    //     path: 'photo/:id(\\d+)',
-    //     name:'Photodetail',
-    //     components:{
-    //       profile: Photodetail,
-    //     },
-       
-    //   }
-
-    // ]  
-  },
-  { path: '/profile/:id(\\d+)',
-      name: 'Profile',
-      component: Profile ,
-      props:routes =>({
-        id: Number(routes.params.id)  //型をけっていできないので指定する
-      })},
    
     // { path: '/posts/:id(\\d+)',  // :id は数値のみに制限する
     //   name: 'PostsDetail',

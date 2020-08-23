@@ -2,7 +2,9 @@
   <div  id="profile-photos">
     <div class="profile-photos">
       <div class="photo-box" v-for="post in user.posts" :key="post.id">
-         <router-link  :to="{ name: 'Photodetail', params: { id: post.id } }"><img @click="openDetail" :src="post.image" ></router-link>
+         <router-link  :to="{ name: 'Photodetail', params: { id: post.id } }">
+           <img @click="openDetail" :src="post.image" >
+          </router-link>
       </div>  
     </div>
     <div @click.self="closeDetail" v-show="isTouched" id="wrapper-mask">
@@ -63,65 +65,67 @@ export default{
 <style scoped lang="scss">
 
 
-.get-opacity{
-  opacity:0.5
-}
-#profile-photos{
-  width:100%;
-  height:200px;
-  
-}
-#wrapper-mask{
-  position:fixed;
-   background:rgba(0,0,0,0.5);
-  /* background:white; */
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  z-index:9;
-}
+  .get-opacity{
+    opacity:0.5
+  }
+  #profile-photos{
+    width:100%;
+    height:200px;
+    
+  }
+  #wrapper-mask{
+    position:fixed;
+    background:rgba(0,0,0,0.5);
+    
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:9;
+  }
 
-#photo-detail{
-  width:80%;
-  margin:0 auto;
-  position: absolute;
-  top: 50%;
-  left:50%;
-  transform: translate(-50%,-50%);
-  z-index:100;
-  background: white;
-  height:600px;
-}
-.profile-photos{
-  width:90%;
-  max-width:970px;
-  display:flex;
-  flex-wrap:wrap;
-  justify-content: space-between;
-  margin:0 auto;
-  position:static;
+  #photo-detail{
+    width:80%;
+    margin:0 auto;
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    z-index:100;
+    background: white;
+    height:600px;
+  }
+  .profile-photos{
+    width:90%;
+    max-width:970px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: start;
+    margin:0 auto;
+    position:static;
     z-index:6;
-  .photo-box{
-    width:33%;
-    margin-bottom:0.5%;
-    position:relative;
-  
-    &:before{
-     content: "";
-     display: block;
-     padding-top: 100%;
-    }
-    img{
-      width:100%;
-      height:100%;
-      position: absolute;
-      top:0;
-      object-fit: cover;
-      z-index:2;  //wrapperよりで額しないとクリックできない
+    .photo-box{
+      width:33%;
+      margin-bottom:0.5%;
+      position:relative;
+      &:not(:nth-child(3n)){
+        margin-right:0.5%;
+      }
+      &:before{
+      content: "";
+      display: block;
+      padding-top: 100%;
+      }
+      img{
+        width:100%;
+        height:100%;
+        position: absolute;
+        top:0;
+        object-fit: cover;
+        z-index:2;  //wrapperよりで額しないとクリックできない
+      }
     }
   }
-}
 
 
 

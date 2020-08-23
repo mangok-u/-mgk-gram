@@ -14,7 +14,7 @@
       <div class="detail-area">
         <div class="detail-area-name">
           <p>{{user.full_name}}</p>
-          <button @click="selectFile">プロフィールを編集</button>
+          <button v-if="user.id==currentUser.id" @click="selectFile">プロフィールを編集</button>
           <a href="#">$</a>
         </div>
         <div class="detail-area-number">
@@ -54,8 +54,8 @@ export default{
   // const postsLength=this.user.posts.length;
     return{
       uploadedImage:'',
-      isTouched:false
-    //  postsLength:postsLength
+      isTouched:false,
+      currentUser:this.$store.state.currentUser
     }
   },
  methods: {

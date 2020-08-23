@@ -42,7 +42,7 @@
         <p class="posts-detail-text-box-text">
           {{firstText}}
         </p>
-        <p class="posts-detail-text-box-next" @click="showNext">続きを読む</p>
+        <p class="posts-detail-text-box-next" v-if="isArray" @click="showNext">続きを読む</p>
       </div>
       <template v-if="isNext">
         <p class="posts-detail-text-box-all"  v-for="(text,index) in restText" :key="index">
@@ -65,6 +65,7 @@ export default {
      return{
        post:{text:''},   //オプションで使う値はすべて先に定義
        user:{},
+       isArray:false,
        isNext:false
      }
    },
@@ -75,6 +76,10 @@ export default {
         this.post = response.data
         this.user = this.post.user
       })
+    
+  },
+  beforeUpdate(){   //mountedと一緒にしていると、空のtextに
+    this.checkArray
   },
   computed:{
     firstText(){
@@ -82,16 +87,30 @@ export default {
       return textArray[0];
     },
     restText(){
-      let textArray= this.post.text.split(/\r\n|\r|\n/);  //shift使うと返り血が消えた値になる
+      let textArray= this.post.text.split(/\r\n|\r|\n/); //shift使うと返り血が消えた値になる
       let restArray=textArray.filter((item, index) => index !== 0);
       return restArray;
+    },
+    checkArray(){
+       let textArray= this.post.text.split(/\r\n|\r|\n/);
+       if(textArray.length>1){
+        this.isArray=true;
+       }
     }
+    
   },
   methods:{
+    // makeTextArray(){
+    //    let textArray= this.post.text.split(/\r\n|\r|\n/);
+    //    return textArray;
+    // },
     showNext(event){
       this.isNext=true;
       event.target.remove();
-    }
+    },
+    
+    
+
   }
 }
 </script>
