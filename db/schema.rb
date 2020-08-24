@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(version: 3020_07_28_031438) do
     t.string "uid"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "following"
-    t.integer "follower"
+    t.integer "following", default: 0
+    t.integer "follower", default: 0
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

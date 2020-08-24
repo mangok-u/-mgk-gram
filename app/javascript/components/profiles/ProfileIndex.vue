@@ -15,7 +15,11 @@
         <div class="detail-area-name">
           <p>{{user.full_name}}</p>
           <button v-if="user.id==currentUser.id" @click="selectFile">プロフィールを編集</button>
-          <button v-else @click="follow">follow</button>
+          <template v-else>
+            <button v-if="isFollow" @click="unFollow">follow解除</button>
+            <button v-else @click="follow">follow</button>
+          </template>
+          
           <a href="#">$</a>
         </div>
         <div class="detail-area-number">
@@ -94,8 +98,27 @@ export default{
           .post(`/api/v1/follows`, {follow})
           .then(response => {
             console.log('follow')
-            this.follower+=1;
+            this.user.follower+=1;
             this.isFollow=true;
+          })
+          .catch(error => {
+            console.error(error);
+            if (error.response.data && error.response.data.errors) {
+              this.errors = error.response.data.errors;
+            }
+          });
+    },
+    unFollow(){
+      const follow = {
+                  following_id: this.currentUser.id,
+                  follower_id: this.user.id,
+                };
+        axios
+          .delete(`/api/v1/follows/${follow.following_id}`,{data: follow})
+          .then(response => {
+            console.log('unfollow')
+            this.user.follower-=1;
+            this.isFollow=false;
           })
           .catch(error => {
             console.error(error);
@@ -107,7 +130,7 @@ export default{
     followingCheck(){
       //profileに紐付けfollowテーブルのfollowしている人をcheck!  follower_idは被フォロー
        let followArray=this.user.follower_info.map((follower)=>follower.following_id);
-        if(followerArray.includes(this.currentUser.id)){
+        if(followArray.includes(this.currentUser.id)){
           this.isFollow=true;
         }
     },
