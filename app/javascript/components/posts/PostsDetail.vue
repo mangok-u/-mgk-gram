@@ -21,9 +21,9 @@
     </div>
     <div class="posts-detail-action">
       <div class="posts-detail-action-left">
-        <p>
-          <font-awesome-icon :class="{liked: isLiked}" @click="like" icon="heart"></font-awesome-icon>
-        </p>
+        <button @click="like">
+          <font-awesome-icon :class="{liked: isLiked}"  icon="heart" disabled></font-awesome-icon>
+        </button>
         <p>$</p>
         <p>$</p>
       </div>
@@ -114,6 +114,7 @@ export default {
     //    return textArray;
     // },
     like(e){
+      e.target.setAttribute("disabled", "disabled")
       const like = {
                   post_id: this.post.id,
                   user_id: this.currentUser.id,
@@ -122,12 +123,14 @@ export default {
         axios
           .post(`/api/v1/likes`,{like})
           .then(response => {
+            e.target.removeAttribute("disabled")
             console.log('like')
             this.isLiked=true;
             this.post.like_number+=1;
   
           })
           .catch(error => {
+             e.target.removAttribute("disabled")
             console.error(error);
             if (error.response.data && error.response.data.errors) {
               this.errors = error.response.data.errors;
@@ -137,6 +140,7 @@ export default {
           axios
           .delete(`/api/v1/likes/${like.post_id}`,{data: like})
           .then(response => {
+            e.target.removeAttribute("disabled")
             console.log('unlike')
             this.isLiked=false;
             this.post.like_number-=1;
@@ -144,6 +148,7 @@ export default {
 
           })
           .catch(error => {
+             e.target.removeAttribute("disabled")
             console.error(error);
             if (error.response.data && error.response.data.errors) {
               this.errors = error.response.data.errors;
@@ -151,26 +156,6 @@ export default {
           });
 
         }
-    },
-    unlike(){
-      const like = {
-                  post_id: this.post.id,
-                  user_id: this.currentUser.id,
-                };
-        axios
-          .delete(`/api/v1/likes${like.post.id}`,{data: like})
-          .then(response => {
-            console.log('like')
-            this.isLiked=false;
-            this.post.like_number-=1;
-          })
-          .catch(error => {
-            console.error(error);
-            if (error.response.data && error.response.data.errors) {
-              this.errors = error.response.data.errors;
-            }
-          });
-
     },
     checkLiked(){
 
@@ -248,6 +233,13 @@ export default {
       &-left{
         width:60%;
         display:flex;
+        button{
+        background:white;
+        border:none;
+        padding:0;
+        font-size:1.6rem;
+        margin-right:15px;
+      }
         p{
           margin-right:15px;
           font-size:1.6rem
