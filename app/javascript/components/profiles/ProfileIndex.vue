@@ -81,8 +81,8 @@ export default{
     }
   },
   beforeUpdate(){
-    console.log(this.user.follower_info);
-    // this.followingCheck();
+  
+    this.followingCheck();
   },
   methods: {
    follow() {
@@ -105,14 +105,11 @@ export default{
           });
     },
     followingCheck(){
-      console.log(this.follower_info)
-      // this.follower_info.forEach((follow)=>{
-      //   if(follow.follower_id.includes(this.currentUser.is)){
-      //     this.isFollow=true;
-      //   }
-      // })
-      
-
+      //profileに紐付けfollowテーブルのfollowしている人をcheck!  follower_idは被フォロー
+       let followArray=this.user.follower_info.map((follower)=>follower.following_id);
+        if(followerArray.includes(this.currentUser.id)){
+          this.isFollow=true;
+        }
     },
     updateIcon() {
       axios
