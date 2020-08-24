@@ -51,21 +51,39 @@ export default{
      follower:Number,
      following:Number,
      posts:Array,
-     followw:{
-       follower_id:Number,
-       follower_id:Number
-     }
-    }
+    //  following_info:{
+    //    follower_id:Number,
+    //    follower_id:Number
+    //  }
+    //  ,
+    //  follower_info:{
+    //    follower_id:Number,
+    //    follower_id:Number
+    //  }
+    
+    },
+    // follower_info:Array
+    follower_info:
+      {
+         following_id:Number,
+         follower_id:Number
+      }
+    
   },
   data(){
   // const postsLength=this.user.posts.length;
     return{
       uploadedImage:'',
       isTouched:false,
+      isFollow:false,
       currentUser:this.$store.state.currentUser
     }
   },
- methods: {
+  beforeUpdate(){
+    console.log(this.follower_info);
+    // this.followingCheck();
+  },
+  methods: {
    follow() {
      const follow = {
                   following_id: this.currentUser.id,
@@ -76,6 +94,7 @@ export default{
           .then(response => {
             console.log('follow')
             this.follower+=1;
+            this.isFollow=true;
           })
           .catch(error => {
             console.error(error);
@@ -83,6 +102,16 @@ export default{
               this.errors = error.response.data.errors;
             }
           });
+    },
+    followingCheck(){
+      console.log(this.follower_info)
+      // this.follower_info.forEach((follow)=>{
+      //   if(follow.follower_id.includes(this.currentUser.is)){
+      //     this.isFollow=true;
+      //   }
+      // })
+      
+
     },
     updateIcon() {
       axios

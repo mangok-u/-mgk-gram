@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ProfileIndex :user="user"></ProfileIndex>
+    <ProfileIndex :follower_info="follower_info" :user="user"></ProfileIndex>
     <ProfileHeader></ProfileHeader>
     <ProfilePhotos :user="user"></ProfilePhotos>
   </div>
@@ -17,7 +17,13 @@ export default{
   },
   data(){
     return{
-      user:{},
+      user:{} , //定義しないとprops先でunbdeife},  dataとpropsりょ方
+      follower_info:[
+       {
+        following_id:0,
+        follower_id:0
+       }
+      ] 
     }
   },
   components:{
@@ -28,7 +34,11 @@ export default{
   mounted () {
     axios
       .get(`/api/v1/users/${this.id}.json`)
-      .then(response => (this.user = response.data ))
+      .then(response => {
+        this.user = response.data 
+        console.log(response.data )
+        this.follower_info=response.data.follower_info
+      })
    }
 }
 </script>
