@@ -21,7 +21,7 @@
     </div>
     <div class="posts-detail-action">
       <div class="posts-detail-action-left">
-        <p>$</p>
+        <p @click="like">$</p>
         <p>$</p>
         <p>$</p>
       </div>
@@ -66,7 +66,8 @@ export default {
        post:{text:''},   //オプションで使う値はすべて先に定義
        user:{},
        isArray:false,
-       isNext:false
+       isNext:false,
+       currentUser:this.$store.state.currentUser
      }
    },
   mounted() {
@@ -100,10 +101,31 @@ export default {
     
   },
   methods:{
+    
     // makeTextArray(){
     //    let textArray= this.post.text.split(/\r\n|\r|\n/);
     //    return textArray;
     // },
+    like(){
+      const like = {
+                  posts_id: this.post.id,
+                  users_id: this.currentUser.id,
+                };
+        axios
+          .post(`/api/v1/likes`,{like})
+          .then(response => {
+            console.log('like')
+            // this.user.follower-=1;
+            // this.isFollow=false;
+          })
+          .catch(error => {
+            console.error(error);
+            if (error.response.data && error.response.data.errors) {
+              this.errors = error.response.data.errors;
+            }
+          });
+    },
+   
     showNext(event){
       this.isNext=true;
       event.target.remove();

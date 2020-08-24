@@ -17,6 +17,7 @@ Rails.application.routes.draw do
         end
       end
       resources :follows, only: [:create, :destroy]
+      resources :likes, only: [:create, :destroy]
       
       
       # mount_devise_token_auth_for 'User', at: 'auth', controllers: {

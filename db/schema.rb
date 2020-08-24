@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 3020_07_28_031438) do
+ActiveRecord::Schema.define(version: 3020_07_28_031440) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -42,11 +42,21 @@ ActiveRecord::Schema.define(version: 3020_07_28_031438) do
     t.index ["following_id"], name: "index_follows_on_following_id"
   end
 
+  create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "users_id", null: false
+    t.bigint "posts_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["posts_id"], name: "index_likes_on_posts_id"
+    t.index ["users_id"], name: "index_likes_on_users_id"
+  end
+
   create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "text"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "like", default: 0
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -65,5 +75,7 @@ ActiveRecord::Schema.define(version: 3020_07_28_031438) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "follows", "users", column: "follower_id"
   add_foreign_key "follows", "users", column: "following_id"
+  add_foreign_key "likes", "posts", column: "posts_id"
+  add_foreign_key "likes", "users", column: "users_id"
   add_foreign_key "posts", "users"
 end
