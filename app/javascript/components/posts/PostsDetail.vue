@@ -67,7 +67,9 @@ export default {
      return{
        post:{
          text:'',
-         likes:[]
+         likes:[
+
+         ]
          },   //オプションで使う値はすべて先に定義
        user:{},
        isArray:false,
@@ -76,18 +78,25 @@ export default {
        currentUser:this.$store.state.currentUser
      }
    },
+   created(){
+     
+   },
   mounted() {
     axios
       .get(`/api/v1/posts/${this.id}.json`)
       .then(response => {
         this.post = response.data
         this.user = this.post.user
+       
       })
+      
+        
     
   },
   beforeUpdate(){   //mountedと一緒にしていると、空のtextに
     this.checkArray
     this.checkLiked();
+  
   },
   computed:{
     firstText(){
@@ -125,8 +134,11 @@ export default {
           .then(response => {
             e.target.removeAttribute("disabled")
             console.log('like')
+            const like=response.data
+            this.post.likes.push(like);
             this.isLiked=true;
             this.post.like_number+=1;
+            console.log(this.post.likes)
   
           })
           .catch(error => {
@@ -141,10 +153,13 @@ export default {
           .delete(`/api/v1/likes/${like.post_id}`,{data: like})
           .then(response => {
             e.target.removeAttribute("disabled")
-            console.log('unlike')
+            const unLike=response.data
+            console.log(unLike)
+            this.post.likes=this.post.likes.filter(like => like.id !== unLike.id)    //kore!!!配列！！！！！！！！！！！！！！！！！！！！！！！！！！
             this.isLiked=false;
             this.post.like_number-=1;
              console.log(this.isLiked)
+              console.log(this.post.likes)
 
           })
           .catch(error => {
@@ -158,7 +173,7 @@ export default {
         }
     },
     checkLiked(){
-
+       console.log(this.post.likes)
       let userArray=this.post.likes.map((user)=>user.user_id);
         if(userArray.includes(this.currentUser.id)){
           this.isLiked=true;   
