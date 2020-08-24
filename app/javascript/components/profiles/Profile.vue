@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ProfileIndex :follower_info="follower_info" :user="user"></ProfileIndex>
+    <ProfileIndex  :user="user"></ProfileIndex>
     <ProfileHeader></ProfileHeader>
     <ProfilePhotos :user="user"></ProfilePhotos>
   </div>
@@ -17,13 +17,9 @@ export default{
   },
   data(){
     return{
-      user:{} , //定義しないとprops先でunbdeife},  dataとpropsりょ方
-      follower_info:[
-       {
-        following_id:0,
-        follower_id:0
-       }
-      ] 
+      user:{
+      } , //定義しないとprops先でunbdeife},  dataとpropsりょ方 いやpropsで定義されていればおけ！！！！！！！！
+      
     }
   },
   components:{
@@ -37,7 +33,7 @@ export default{
       .then(response => {
         this.user = response.data 
         console.log(response.data )
-        this.follower_info=response.data.follower_info
+        // this.follower_info=response.data.follower_info
       })
    }
 }

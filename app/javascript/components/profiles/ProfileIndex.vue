@@ -51,6 +51,7 @@ export default{
      follower:Number,
      following:Number,
      posts:Array,
+     follower_info:Array  //むしろ中のkeyは必要ない！！！！１
     //  following_info:{
     //    follower_id:Number,
     //    follower_id:Number
@@ -63,11 +64,11 @@ export default{
     
     },
     // follower_info:Array
-    follower_info:
-      {
-         following_id:Number,
-         follower_id:Number
-      }
+    // follower_info:
+    //   {
+    //      following_id:Number,
+    //      follower_id:Number
+    //   }
     
   },
   data(){
@@ -80,7 +81,7 @@ export default{
     }
   },
   beforeUpdate(){
-    console.log(this.follower_info);
+    console.log(this.user.follower_info);
     // this.followingCheck();
   },
   methods: {
