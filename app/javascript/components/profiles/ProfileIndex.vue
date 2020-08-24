@@ -13,14 +13,15 @@
       </div>
       <div class="detail-area">
         <div class="detail-area-name">
-          <p>{{user.full_name}}</p>
+          <p class="detail-area-name-user" >{{user.full_name}}</p>
           <button v-if="user.id==currentUser.id" @click="selectFile">プロフィールを編集</button>
           <template v-else>
             <button v-if="isFollow" @click="unFollow">follow解除</button>
             <button v-else @click="follow">follow</button>
+            <p class="detail-area-name-follow" v-if="isGetFollow">あなたをフォローしています</p>
           </template>
           
-          <a href="#">$</a>
+          <!-- <a href="#">$</a> -->
         </div>
         <div class="detail-area-number">
           <p>投稿{{user.posts.length}}</p>
@@ -55,7 +56,8 @@ export default{
      follower:Number,
      following:Number,
      posts:Array,
-     follower_info:Array  //むしろ中のkeyは必要ない！！！！１
+     following_info:Array, //むしろ中のkeyは必要ない！！！！１
+     follower_info:Array
     //  following_info:{
     //    follower_id:Number,
     //    follower_id:Number
@@ -81,12 +83,14 @@ export default{
       uploadedImage:'',
       isTouched:false,
       isFollow:false,
+      isGetFollow:false,
       currentUser:this.$store.state.currentUser
     }
   },
   beforeUpdate(){
   
     this.followingCheck();
+    this.getFollowedCheck()
   },
   methods: {
    follow() {
@@ -127,11 +131,18 @@ export default{
             }
           });
     },
-    followingCheck(){
+    followingCheck(){//currentがfollowしている
       //profileに紐付けfollowテーブルのfollowしている人をcheck!  follower_idは被フォロー
        let followArray=this.user.follower_info.map((follower)=>follower.following_id);
         if(followArray.includes(this.currentUser.id)){
           this.isFollow=true;
+        }
+    },
+    getFollowedCheck(){//currentがfollowされているか
+      //profileに紐付けfollowテーブルのfollowしている人をcheck!  follower_idは被フォロー
+       let followerArray=this.user.following_info.map((follow)=>follow.follower_id);
+        if(followerArray.includes(this.currentUser.id)){
+          this.isGetFollow=true;
         }
     },
     updateIcon() {
@@ -222,7 +233,7 @@ export default{
        display:flex;
        align-items: center;
        margin-bottom:30px;
-       p{
+       &-user{
          font-size:2.5rem;
          margin-right:20px;
        }
@@ -236,6 +247,10 @@ export default{
        }
        a{
          font-size:1.6rem;
+       }
+       &-follow{
+         font-size:1.2rem;
+         color: rgba(var(--f52,142,142,142),1);
        }
      }
      &-number{
