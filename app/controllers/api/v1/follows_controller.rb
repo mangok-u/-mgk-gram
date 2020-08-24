@@ -5,11 +5,12 @@ class Api::V1::FollowsController < ApiController
     following=User.find(follow_params[:following_id])
     follower=User.find(follow_params[:follower_id])
     if @follwe.save
-      # increment便利すぎ！！！！！！
       following.increment!(:following, 1)
       follower.increment!(:follower, 1)
-
-      render json: @follwe, staus: :created
+      
+      @follower_info=follower.follower_info
+      render json:  @follower_info, each_serializer: FollowSerializer
+      # render json: @follwe, staus: :created
     else
       render json: { errors: @follwe.errors.full_messages }, status: :unprocessable_entity
     end
@@ -26,7 +27,8 @@ class Api::V1::FollowsController < ApiController
       following.decrement!(:following, 1)
       follower.decrement!(:follower, 1)
 
-      render json: @follwe, staus: :created
+      @follower_info=follower.follower_info
+      render json: @follower_info, each_serializer: FollowSerializer
     else
       render json: { errors: @follwe.errors.full_messages }, status: :unprocessable_entity
     end

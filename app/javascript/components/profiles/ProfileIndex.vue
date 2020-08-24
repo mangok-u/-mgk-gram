@@ -102,6 +102,7 @@ export default{
           .post(`/api/v1/follows`, {follow})
           .then(response => {
             console.log('follow')
+            this.user.follower_info=response.data
             this.user.follower+=1;
             this.isFollow=true;
           })
@@ -121,6 +122,7 @@ export default{
           .delete(`/api/v1/follows/${follow.following_id}`,{data: follow})
           .then(response => {
             console.log('unfollow')
+            this.user.follower_info=response.data
             this.user.follower-=1;
             this.isFollow=false;
           })
