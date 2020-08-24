@@ -134,8 +134,9 @@ export default {
           .then(response => {
             e.target.removeAttribute("disabled")
             console.log('like')
-            const like=response.data
-            this.post.likes.push(like);
+            // const like=response.data
+            // this.post.likes.push(like);
+            this.post.likes=response.data
             this.isLiked=true;
             this.post.like_number+=1;
             console.log(this.post.likes)
@@ -153,9 +154,11 @@ export default {
           .delete(`/api/v1/likes/${like.post_id}`,{data: like})
           .then(response => {
             e.target.removeAttribute("disabled")
-            const unLike=response.data
-            console.log(unLike)
-            this.post.likes=this.post.likes.filter(like => like.id !== unLike.id)    //kore!!!配列！！！！！！！！！！！！！！！！！！！！！！！！！！
+            // const unLike=response.data
+            console.log('unLike')
+            // this.post.likes=this.post.likes.filter(like => like.id !== unLike.id) 
+            //kore!!!配列！！！！！！！！！！！！！！！！！！！！！！！！！！
+            this.post.likes=response.data    //結局dataをレスポンスで上書き
             this.isLiked=false;
             this.post.like_number-=1;
              console.log(this.isLiked)
