@@ -118,14 +118,14 @@ export default {
                   post_id: this.post.id,
                   user_id: this.currentUser.id,
                 };
+        if(this.isLiked==false){
         axios
           .post(`/api/v1/likes`,{like})
           .then(response => {
             console.log('like')
             this.isLiked=true;
             this.post.like_number+=1;
-            // this.user.follower-=1;
-            // this.isFollow=false;
+  
           })
           .catch(error => {
             console.error(error);
@@ -133,12 +133,50 @@ export default {
               this.errors = error.response.data.errors;
             }
           });
+        }else{
+          axios
+          .delete(`/api/v1/likes/${like.post_id}`,{data: like})
+          .then(response => {
+            console.log('unlike')
+            this.isLiked=false;
+            this.post.like_number-=1;
+             console.log(this.isLiked)
+
+          })
+          .catch(error => {
+            console.error(error);
+            if (error.response.data && error.response.data.errors) {
+              this.errors = error.response.data.errors;
+            }
+          });
+
+        }
+    },
+    unlike(){
+      const like = {
+                  post_id: this.post.id,
+                  user_id: this.currentUser.id,
+                };
+        axios
+          .delete(`/api/v1/likes${like.post.id}`,{data: like})
+          .then(response => {
+            console.log('like')
+            this.isLiked=false;
+            this.post.like_number-=1;
+          })
+          .catch(error => {
+            console.error(error);
+            if (error.response.data && error.response.data.errors) {
+              this.errors = error.response.data.errors;
+            }
+          });
+
     },
     checkLiked(){
 
       let userArray=this.post.likes.map((user)=>user.user_id);
         if(userArray.includes(this.currentUser.id)){
-          this.isLiked=true;
+          this.isLiked=true;   
           console.log(this.isLiked);
         }
     },

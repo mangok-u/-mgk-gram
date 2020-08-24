@@ -16,6 +16,23 @@ class Api::V1::LikesController < ApiController
     
   end
 
+  def destroy
+    like_info=Like.where(post_id: like_params[:post_id])
+    like_post=Post.find(like_params[:post_id])
+    @like=like_info.find_by(user_id: like_params[:user_id])
+    # follower=User.find(follow_params[:follower_id])
+    if @like.destroy
+      # increment便利すぎ！！！！！！
+      like_post.decrement!(:like_number, 1)
+     
+
+      render json: @like, staus: :created
+    else
+      render json: { errors: @like.errors.full_messages }, status: :unprocessable_entity
+    end
+    
+  end
+
   # def destroy
   #   follow_info=Follow.where(following_id: params[:id])
   #   @follow=follow_info.find_by(follower_id:follow_params[:follower_id])
