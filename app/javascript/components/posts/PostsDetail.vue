@@ -21,7 +21,7 @@
     </div>
     <div class="posts-detail-action">
       <div class="posts-detail-action-left">
-        <p @click="like">♡</p>
+        <p :class="{liked: isLiked}" @click="like">♡</p>
         <p>$</p>
         <p>$</p>
       </div>
@@ -29,8 +29,8 @@
         <p>$</p>
       </div>
     </div>
-    <div class="posts-detail-like">
-      <p>100人がいいねしました</p>
+    <div v-if="post.like_number>0" class="posts-detail-like">
+      <p>{{post.like_number}}人がいいねしました</p>
     </div>
     <div class="posts-detail-text">
       <div class="posts-detail-text-box">
@@ -120,7 +120,8 @@ export default {
           .post(`/api/v1/likes`,{like})
           .then(response => {
             console.log('like')
-            e.target.style="background-color: red;"
+            this.isLiked=true;
+            this.post.like_number+=1;
             // this.user.follower-=1;
             // this.isFollow=false;
           })
@@ -152,6 +153,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+  .liked{
+    background:tomato;
+  }
   .posts-detail{
     width:100%;
     border: 1px solid rgba(var(--b6a,219,219,219),1);
