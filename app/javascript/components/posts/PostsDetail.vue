@@ -21,7 +21,7 @@
     </div>
     <div class="posts-detail-action">
       <div class="posts-detail-action-left">
-        <p @click="like">$</p>
+        <p @click="like">♡</p>
         <p>$</p>
         <p>$</p>
       </div>
@@ -63,10 +63,14 @@ export default {
    },
    data(){
      return{
-       post:{text:''},   //オプションで使う値はすべて先に定義
+       post:{
+         text:'',
+         likes:[]
+         },   //オプションで使う値はすべて先に定義
        user:{},
        isArray:false,
        isNext:false,
+       isLiked:false,
        currentUser:this.$store.state.currentUser
      }
    },
@@ -81,6 +85,7 @@ export default {
   },
   beforeUpdate(){   //mountedと一緒にしていると、空のtextに
     this.checkArray
+    this.checkLiked();
   },
   computed:{
     firstText(){
@@ -106,15 +111,16 @@ export default {
     //    let textArray= this.post.text.split(/\r\n|\r|\n/);
     //    return textArray;
     // },
-    like(){
+    like(e){
       const like = {
-                  posts_id: this.post.id,
-                  users_id: this.currentUser.id,
+                  post_id: this.post.id,
+                  user_id: this.currentUser.id,
                 };
         axios
           .post(`/api/v1/likes`,{like})
           .then(response => {
             console.log('like')
+            e.target.style="background-color: red;"
             // this.user.follower-=1;
             // this.isFollow=false;
           })
@@ -124,6 +130,14 @@ export default {
               this.errors = error.response.data.errors;
             }
           });
+    },
+    checkLiked(){
+
+      let userArray=this.post.likes.map((user)=>user.user_id);
+        if(userArray.includes(this.currentUser.id)){
+          this.isLiked=true;
+          console.log(this.isLiked);
+        }
     },
    
     showNext(event){

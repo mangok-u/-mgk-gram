@@ -1,5 +1,5 @@
 class AddcolumnPosts < ActiveRecord::Migration[6.0]
   def change
-    add_column :posts, :like, :integer,default: 0
+    add_column :posts, :like_number, :integer,default: 0
   end
 end

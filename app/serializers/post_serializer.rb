@@ -7,8 +7,9 @@ class PostSerializer < ActiveModel::Serializer
   #local_host3000にsる
   # Rails.application.routes.default_url_options[:host] = host
   
-  attributes :id,:text,:user_id,:image
+  attributes :id,:text,:user_id,:image,:like_number
   belongs_to :user
+  has_many :likes
 
 
     def image

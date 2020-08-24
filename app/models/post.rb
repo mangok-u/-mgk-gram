@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   # include ActiveStorageSupport::SupportForBase64
   belongs_to :user
+  has_many :likes
 
   has_one_attached :mgk_image
   attr_accessor :image

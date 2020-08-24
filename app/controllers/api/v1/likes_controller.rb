@@ -2,11 +2,11 @@ class Api::V1::LikesController < ApiController
 
   def create
     @like=Like.new(like_params)
-    like_post=Post.find(like_params[:posts_id])
+    like_post=Post.find(like_params[:post_id])
     # follower=User.find(follow_params[:follower_id])
     if @like.save
       # increment便利すぎ！！！！！！
-      like_post.increment!(:like, 1)
+      like_post.increment!(:like_number, 1)
      
 
       render json: @like, staus: :created
@@ -37,7 +37,7 @@ class Api::V1::LikesController < ApiController
   private
 
   def like_params
-    params.require(:like).permit(:posts_id,:users_id)
+    params.require(:like).permit(:post_id,:user_id)
   end
 
 end
