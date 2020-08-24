@@ -13,6 +13,14 @@ import firebase from 'firebase'
 import store from '../store';
 import "firebase/auth";
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faHeart)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
 // import '../plugins'
 
  //普通にnpminstall de行けた

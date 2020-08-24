@@ -21,7 +21,9 @@
     </div>
     <div class="posts-detail-action">
       <div class="posts-detail-action-left">
-        <p :class="{liked: isLiked}" @click="like">♡</p>
+        <p>
+          <font-awesome-icon :class="{liked: isLiked}" @click="like" icon="heart"></font-awesome-icon>
+        </p>
         <p>$</p>
         <p>$</p>
       </div>
@@ -155,7 +157,7 @@ export default {
 <style scoped lang="scss">
 
   .liked{
-    background:tomato;
+   color:tomato;
   }
   .posts-detail{
     width:100%;
