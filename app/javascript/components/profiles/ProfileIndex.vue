@@ -73,6 +73,10 @@ export default{
     this.followingCheck();
     this.getFollowedCheck()
   },
+
+  watch:{
+     follower
+  },
   methods: {
    follow() {
      const follow = {
@@ -171,7 +175,7 @@ export default{
             let reg=new RegExp(`\\d{${i},}`)   //regらないと変数使えない
           
               if (reg.test(val)){
-                let reduceNum=Math.round(val/1000)*1000 //どの部分を基準にするか
+                let reduceNum=Math.floor(val/1000)*1000 //どの部分を基準にするか
                 let newVal=String(reduceNum).slice(0,reduceIndex); //oから何個ぶん撮りたいか
                 finalVal=newVal.slice(0,dotIndex)+ '.' +newVal.slice(dotIndex) //0から何個めに入れたい？
               
@@ -259,8 +263,8 @@ export default{
         button{
           border: 1px solid transparent;
           background-color: #0095f6;
-          width:100px;
           margin-right:20px;
+          padding: 0 20px;
           height:26px;
           color:white;
           border-radius:3px;
