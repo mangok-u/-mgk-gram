@@ -25,7 +25,7 @@
         </div>
         <div class="detail-area-number">
           <p >投稿{{user.posts.length}}</p>
-          <p >フォロワー{{showNum(user.follower)}}人</p>
+          <p >フォロワー{{follower_number}}人</p>
           <p>フォロー中{{showNum(user.following)}}人</p>
         </div>
         <div class="detail-area-intro">
@@ -62,6 +62,8 @@ export default{
   },
   data(){
     return{
+      follower_number:'',
+      following_number:'',
       uploadedImage:'',
       isTouched:false,
       isFollow:false,
@@ -72,11 +74,14 @@ export default{
   beforeUpdate(){
     this.followingCheck();
     this.getFollowedCheck()
+    this.follower_number=this.showNum(this.user.follower);
+      console.log(this.follower_number)
+
   },
 
-  watch:{
-     follower
-  },
+  // watch:{
+  //    follower
+  // },
   methods: {
    follow() {
      const follow = {
@@ -89,6 +94,7 @@ export default{
             console.log('follow')
             this.user.follower_info=response.data
             this.user.follower+=1;
+            console.log(this.follower_number)
             this.isFollow=true;
           })
           .catch(error => {
@@ -186,6 +192,7 @@ export default{
               
               }
           }
+         
          return finalVal+'万'
 
         }else{
