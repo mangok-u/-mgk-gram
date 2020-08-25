@@ -24,9 +24,9 @@
           <!-- <a href="#">$</a> -->
         </div>
         <div class="detail-area-number">
-          <p>投稿{{user.posts.length}}</p>
-          <p >フォロワー{{user.follower}}人</p>
-          <p>フォロー中{{user.following}}人</p>
+          <p >投稿{{user.posts.length}}</p>
+          <p >フォロワー{{showNum(user.follower)}}人</p>
+          <p>フォロー中{{showNum(user.following)}}人</p>
         </div>
         <div class="detail-area-intro">
           <p class="detail-area-intro-name">{{user.user_name}}</p>
@@ -58,27 +58,9 @@ export default{
      posts:Array,
      following_info:Array, //むしろ中のkeyは必要ない！！！！１
      follower_info:Array
-    //  following_info:{
-    //    follower_id:Number,
-    //    follower_id:Number
-    //  }
-    //  ,
-    //  follower_info:{
-    //    follower_id:Number,
-    //    follower_id:Number
-    //  }
-    
     },
-    // follower_info:Array
-    // follower_info:
-    //   {
-    //      following_id:Number,
-    //      follower_id:Number
-    //   }
-    
   },
   data(){
-  // const postsLength=this.user.posts.length;
     return{
       uploadedImage:'',
       isTouched:false,
@@ -88,7 +70,6 @@ export default{
     }
   },
   beforeUpdate(){
-  
     this.followingCheck();
     this.getFollowedCheck()
   },
@@ -163,7 +144,6 @@ export default{
     },
       onFileChange() {
         let file = event.target.files[0] || event.dataTransfer.files
-        // this.imgSrc=URL.createObjectURL(file);
         let reader = new FileReader()
 
           reader.onload = () => {
@@ -178,8 +158,45 @@ export default{
         a.click();
         this.isTouched=true;
       
+      },
+       showNum(val){
+        // let pattern=/\d{5,}/
+        let finalVal=""
+        let reduceIndex=4  //forの中に入れて置かないと、繰り返し時にリセット
+        let dotIndex=3
+
+        if(val>=10000){
+          for(let i=7; i>4; i--){
+           
+            let reg=new RegExp(`\\d{${i},}`)   //regらないと変数使えない
+          
+              if (reg.test(val)){
+                let reduceNum=Math.round(val/1000)*1000 //どの部分を基準にするか
+                let newVal=String(reduceNum).slice(0,reduceIndex); //oから何個ぶん撮りたいか
+                finalVal=newVal.slice(0,dotIndex)+ '.' +newVal.slice(dotIndex) //0から何個めに入れたい？
+              
+              }else{
+                reduceIndex-=1
+                dotIndex-=1
+                //elseに入れないと一致しなかった場合読まれない
+              
+              }
+          }
+         return finalVal+'万'
+
+        }else{
+          return String(val)
+        }
+       
+        // if (val>=10000){
+        //   let reduceNum=Math.round(val * 100)/10
+        //   let newVal=String(reduceNum).slice(0,2);
+        //   let finalVal=newVal.slice(0,1)+ '.' +newVal.slice(1)
+        //   return finalVal+'万'
+        // }
       }
-    }
+    },
+  
   }
 
 
@@ -239,14 +256,16 @@ export default{
          font-size:2.5rem;
          margin-right:20px;
        }
-       button{
-         margin-right:20px;
-         background:white;
-         border:solid 1px #8e8e8e;
-         border-radius: 4px;
-         padding:2px 4px;
-         font-weight: bold;
-       }
+        button{
+          border: 1px solid transparent;
+          background-color: #0095f6;
+          width:100px;
+          margin-right:20px;
+          height:26px;
+          color:white;
+          border-radius:3px;
+          font-weight:bold;
+          }
        a{
          font-size:1.6rem;
        }
