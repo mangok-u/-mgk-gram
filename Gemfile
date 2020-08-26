@@ -57,6 +57,7 @@ gem 'devise_token_auth', github: 'lynndylanhurley/devise_token_auth'
 
 # CORS設定
 gem 'rack-cors'
+gem 'ransack'
 gem 'pry-rails'
 gem 'mini_magick'
 gem "jbuilder", "~> 2.7"

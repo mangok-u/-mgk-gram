@@ -15,9 +15,13 @@ Rails.application.routes.draw do
         member do
           patch "icon_update"
         end
+        collection do
+          get "search"
+        end
       end
       resources :follows, only: [:create, :destroy]
       resources :likes, only: [:create, :destroy]
+
       
       
       # mount_devise_token_auth_for 'User', at: 'auth', controllers: {

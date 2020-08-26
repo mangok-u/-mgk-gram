@@ -1,6 +1,5 @@
 class Api::V1::UsersController < ApiController
 
-
   def index
     if params[:uid] 
       @user = User.find_by(uid: params[:uid])
@@ -25,13 +24,19 @@ class Api::V1::UsersController < ApiController
     @user=User.find(params[:id])
   
     if @user.update(user_params)
-      @user.parse_base64(params[:image])
-    
-   
-      render json: @user, staus: :created
+        @user.parse_base64(params[:image])
+        render json: @user, staus: :created
     else
       render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
     end
+  end
+
+  def search
+    @q=User.ransack(search_params)  #引数いじるな　to_s下が自動でしてくれる
+    @users=@q.result(distinct: true)
+
+    render json: @users, each_serializer: UserSerializer
+
   end
 
 
@@ -52,7 +57,9 @@ private
     params.require(:user).permit(:password,:email, :uid, :full_name,:user_name,:image)
   end
 
-
+  def search_params
+    params.require(:q).permit(:follower_gteq)
+  end
 
 
 end

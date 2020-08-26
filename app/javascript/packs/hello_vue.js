@@ -18,8 +18,13 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faHeart)
-
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+import ElementUI from 'element-ui'
+import locale from 'element-ui/lib/locale/lang/ja'
+import 'element-ui/lib/theme-chalk/index.css'
+
+Vue.use(ElementUI, { locale })
 
 // import '../plugins'
 
