@@ -1,17 +1,19 @@
 <template>
   <div class="search-result">
     <ul class="search-result-list">
-      <li class="search-result-list-row" v-for="user in users" :key="user.id">
-        <div class="search-result-list-row-box">
-          <div class="search-result-list-row-box-left">
-            <img v-if="user.image===null" class="search-result-list-row-box-left-img" src="/images/damy.jpg"> 
-            <img v-else class="search-result-list-row-box-left-img" :src=user.image> 
+      <li class="search-result-list-row" @click="showProfile"  v-for="user in users" :key="user.id">
+        <router-link :to="{ name: 'Profile', params: { id: user.id } } ">
+          <div class="search-result-list-row-box">
+            <div class="search-result-list-row-box-left">
+              <img v-if="user.image===null" class="search-result-list-row-box-left-img" src="/images/damy.jpg"> 
+              <img v-else class="search-result-list-row-box-left-img" :src=user.image> 
+            </div>
+            <div class="search-result-list-row-box-right">
+              <p class="search-result-list-row-box-right-user_name">{{user.user_name}}</p>
+              <p class="search-result-list-row-box-right-full_name">{{user.full_name}}</p>
+            </div>
           </div>
-          <div class="search-result-list-row-box-right">
-            <p class="search-result-list-row-box-right-user_name">{{user.user_name}}</p>
-            <p class="search-result-list-row-box-right-full_name">{{user.full_name}}</p>
-          </div>
-        </div>
+        </router-link>
       </li>
     </ul>
 
@@ -28,6 +30,11 @@
       
       };
     },
+    methods:{    //routerにメソッドかけても行かない！！
+      showProfile(){
+        this.$emit("getFalse")
+      }
+    }
    
      
   };

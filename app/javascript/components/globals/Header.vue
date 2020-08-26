@@ -2,13 +2,12 @@
   <div id="header">
     <div class="header">
       <div class="header-left">
-        <!-- <h2 class="header-left_name">Mgkgram</h2> -->
         <h2 class="header-left_name" ><router-link to="/">Mgkgram</router-link></h2>
       </div>
       <div class="header-center">
-        <input class="search-input" @input="search" type="text" v-model="params.follower_gteq" placeholder="フォロワー数で検索">
+        <input class="search-input" @input="search" type="number" v-model="params.follower_gteq" placeholder="フォロワー数で検索">
           <div id="search-result" v-if="isSearched" >
-            <SearchResult :users="users"></SearchResult>
+            <SearchResult :users="users" @getFalse="removeResult" ></SearchResult>
           </div>
           <div class="search-wrapper" v-if="isSearched" @click="removeResult"></div> 
       </div>
@@ -54,7 +53,7 @@ methods:{
   },
   search(){
 
-    this.params.follower_gteq=Number(this.params.follower_gteq);
+    // this.params.follower_gteq=Number(this.params.follower_gteq);
     console.log(this.params.follower_gteq)
     axios
       .get('/api/v1/users/search.json',{params:{
