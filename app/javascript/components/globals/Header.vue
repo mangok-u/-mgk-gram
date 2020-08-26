@@ -135,7 +135,7 @@ components:{
         top:40px;
         left:-25px;
         width:250px;
-        height:400px;
+
         z-index:10;
       }
       .search-wrapper{
