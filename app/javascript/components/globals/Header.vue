@@ -5,7 +5,13 @@
         <!-- <h2 class="header-left_name">Mgkgram</h2> -->
         <h2 class="header-left_name" ><router-link to="/">Mgkgram</router-link></h2>
       </div>
-      <input class="header-center" @change="search" type="text" v-model="params.follower_gteq" placeholder="フォロワー数で検索">
+      <div class="header-center">
+        <input class="search-input" @input="search" type="text" v-model="params.follower_gteq" placeholder="フォロワー数で検索">
+          <div id="search-result" v-if="isSearched" >
+            <SearchResult :users="users"></SearchResult>
+          </div>
+          <div class="search-wrapper" v-if="isSearched" @click="removeResult"></div> 
+      </div>
       <ul class="header-right">
         <li class="header-right_icon" ><router-link to="/posts/new">post</router-link></li>
         <li @click="logout" class="header-right_icon">Logout</li>
@@ -20,15 +26,17 @@
 
 import firebase from 'firebase'
 import axios from 'axios';
-import serch from "./serch"
+import SearchResult from "./SearchResult"
 import Qs from 'qs'
 export default{
 
 data(){
   return{
     params:{
-     follower_gteq:""
-    }
+     follower_gteq:"",
+    },
+    users:[],
+    isSearched:false
   }
 },
 methods:{
@@ -46,9 +54,6 @@ methods:{
   },
   search(){
 
-    // const q={
-    //     follower_gteq:this.follower_gteq
-    //   }
     this.params.follower_gteq=Number(this.params.follower_gteq);
     console.log(this.params.follower_gteq)
     axios
@@ -61,17 +66,22 @@ methods:{
       })
         .then((response) => {
           console.log(response);
-        
+          this.isSearched=true;
+          this.users=response.data
+
         })
         .catch((error) => {
           console.log(error);
           this.notify(error.message);
         })
 
+  },
+  removeResult(){
+    this.isSearched=false
   }
 },
 components:{
- 
+ SearchResult
 }
 
 }
@@ -99,8 +109,9 @@ components:{
   display:flex;
   letter-spacing: 1.2px;
   font-size:1.6rem;
+  // position: relative;
   &-left{
-    width:50%;
+    width:30%;
     &_name{
       font-size:2rem;
        font-family:'Courier';
@@ -108,14 +119,34 @@ components:{
       // font-weight: bold;
     }
     }
-  &-center{
-    font-size:1.2rem;
-    color:rgba(var(--b6a, 219, 219, 219), 1);
-    height: 28px;
-    background: rgba(var(--b3f,250,250,250),1);
-    border: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
-    border-radius: 2px;
-  }
+    &-center{
+        position:relative;
+      .search-input{
+        width:200px;
+        font-size:1.2rem;
+        color:rgba(var(--b6a, 219, 219, 219), 1);
+        height: 28px;
+        background: rgba(var(--b3f,250,250,250),1);
+        border: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+        border-radius: 2px;
+      }
+      #search-result{
+        position:absolute;
+        top:40px;
+        left:-25px;
+        width:250px;
+        height:400px;
+        z-index:10;
+      }
+      .search-wrapper{
+        position:fixed;
+        width:100%;
+        height:100%;
+        top:0;
+        left:0;
+        z-index:0
+      }
+    }
    &-right{
     display:inline-flex;   
     &_icon{
