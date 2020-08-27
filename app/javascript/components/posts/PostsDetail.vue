@@ -4,7 +4,7 @@
       <div class="posts-detail-header-left">
         <p>
           <img v-if="user.image!=null" class="posts-detail-header-left-icon" :src="user.image">
-          <img v-else class="posts-detail-header-left-icon" src="/images/damy.jpg">
+          <img v-else class="posts-detail-header-left-icon" :src="damyIcon">
         </p> 
         <p class="posts-detail-header-left-name">
           <router-link :to="{ name: 'Profile', params: { id: user.id } } ">
@@ -75,7 +75,8 @@ export default {
        isArray:false,
        isNext:false,
        isLiked:false,
-       currentUser:this.$store.state.currentUser
+       currentUser:this.$store.state.currentUser,
+       damyIcon:'/images/damy.jpg'
      }
    },
    created(){
@@ -85,6 +86,7 @@ export default {
     axios
       .get(`/api/v1/posts/${this.id}.json`)
       .then(response => {
+
         this.post = response.data
         this.user = this.post.user
        

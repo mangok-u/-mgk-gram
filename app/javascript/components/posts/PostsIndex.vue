@@ -28,8 +28,14 @@ export default {
       .get('/api/v1/posts.json')
       .then(response => {
         this.posts = response.data
-        this.isLoading=false;
+        let vm=this
+        setTimeout(()=>{
+          vm.isLoading=false
+        },2000);
       })
+  },
+  updated(){
+
   },
   components:{
     PostsDetail,
