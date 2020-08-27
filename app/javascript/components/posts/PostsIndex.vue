@@ -29,9 +29,9 @@ export default {
       .then(response => {
         this.posts = response.data
         let vm=this
-        setTimeout(()=>{
+        // setTimeout(()=>{
           vm.isLoading=false
-        },2000);
+        // },2000);
       })
   },
   updated(){

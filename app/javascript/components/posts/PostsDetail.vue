@@ -2,10 +2,13 @@
   <div class="posts-detail">
     <div class="posts-detail-header">
       <div class="posts-detail-header-left">
-        <p>
-          <img v-if="user.image!=null" class="posts-detail-header-left-icon" :src="user.image">
-          <img v-else class="posts-detail-header-left-icon" :src="damyIcon">
-        </p> 
+        <div class="posts-detail-header-left-icon_box">
+          <img v-if="user.image!=null" class="posts-detail-header-left-icon_box-icon" :src="user.image" @load="iconLoaded">
+          <div class="posts-detail-header-left-icon_box-loading" v-else-if="isIconLoading">
+            <LoadingMin></LoadingMin>
+          </div>
+          <img v-else class="posts-detail-header-left-icon_box-icon" :src="damyIcon" @load="iconLoaded">
+        </div> 
         <p class="posts-detail-header-left-name">
           <router-link :to="{ name: 'Profile', params: { id: user.id } } ">
             {{user.user_name}}
@@ -17,7 +20,10 @@
       </div>
     </div>
     <div class="posts-detail-image">
-      <img :src="post.image">
+      <img :src="post.image" @load="imageLoaded">
+      <div class="posts-detail-image-loading" v-show="isImgLoading">
+        <LoadingMin></LoadingMin>
+      </div>
     </div>
     <div class="posts-detail-action">
       <div class="posts-detail-action-left">
@@ -57,6 +63,7 @@
 
 <script>
 import axios from 'axios';
+import LoadingMin from '../../LoadingMin.vue'
 
 export default {
    
@@ -75,6 +82,8 @@ export default {
        isArray:false,
        isNext:false,
        isLiked:false,
+       isImgLoading:true,
+       isIconLoading:true,
        currentUser:this.$store.state.currentUser,
        damyIcon:'/images/damy.jpg'
      }
@@ -190,9 +199,18 @@ export default {
       this.isNext=true;
       event.target.remove();
     },
+    imageLoaded(){
+      this.isImgLoading=false;
+    },
+    iconLoaded(){
+      this.isImgLoading=false;
+    }
     
     
 
+  },
+  components:{
+    LoadingMin
   }
 }
 </script>
@@ -216,14 +234,26 @@ export default {
       justify-content: space-between;
       align-items: center;
       &-left{
-        display:flex;
         width:80%;
-        &-icon{
-          width:32px;
-          height:32px;
+        display:flex;
+        align-items: center;
+        &-icon_box{
           margin-right:10px;
-          object-fit: cover;
-          border-radius: 50%;
+          position: relative;
+        
+          &-icon{
+            width:32px;
+            height:32px;
+            margin-right:10px;
+            object-fit: cover;
+            border-radius: 50%;
+          }
+          &-loading{
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform: translateY(-50%) translateX(-50%);
+          }
         }
         &-name{
           font-size:1.4rem;
@@ -237,10 +267,17 @@ export default {
     }
     &-image{
       width:100%;
+      position: relative;
       img{
         width:100%;
         height:550px;
         object-fit: cover;
+      }
+      &-loading{
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform: translateY(-50%) translateX(-50%);
       }
     }
     &-action{
