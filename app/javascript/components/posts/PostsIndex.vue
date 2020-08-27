@@ -7,26 +7,33 @@
         </div>
       </div>
     </div>
+    <Loading v-if="isLoading"></Loading>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 import PostsDetail from './PostsDetail.vue'
+import Loading from '../../Loading.vue'
 
 export default {
   data: function () {
     return {
-      posts: []
+      posts: [],
+      isLoading:true
     }
   },
   mounted(){
     axios
       .get('/api/v1/posts.json')
-      .then(response => (this.posts = response.data))
+      .then(response => {
+        this.posts = response.data
+        this.isLoading=false;
+      })
   },
   components:{
-    PostsDetail
+    PostsDetail,
+    Loading
   }
  
 }

@@ -1,12 +1,19 @@
 <template>
-<div class="posts-new">
-  <posts-form :errors="errors"  :post="post" @submittt="createPost"></posts-form>
-</div>
+  <div class="posts-new">
+    <posts-form :errors="errors"  :post="post" @submittt="createPost"></posts-form>
+    <!-- <div  v-show="isLoading" class="loading-container">
+      <vue-loading type="spin" color="#333" :size="{ width: '50px', height: '50px' }"></vue-loading>
+    </div> -->
+    <Loading v-show="isLoading"></Loading>
+  </div>
 </template>
 
 <script>
 import axios from 'axios';
 import PostsForm from './PostsForm.vue'
+import Loading from '../../Loading.vue'
+
+
 export default {
   data: function () {
     return {
@@ -16,8 +23,8 @@ export default {
         image:'',
         user_id:this.$store.state.currentUser.id
       },
-    
-      errors: ''
+      errors: '',
+      isLoading:false,
     }
   },
 
@@ -28,14 +35,18 @@ export default {
   },
   methods: {
     createPost: function() {
+      this.isLoading=true
+      console.log(this.isLoading)
       axios
         .post('/api/v1/posts', this.post)
         .then(response => {
+            this.isLoading=false;
           let e = response.data;
           this.$router.push({path: '/'});
           //上記に遷移
         })
         .catch(error => {
+          this.isLoading=false;
           console.log(this.$store.state.currentUser)
           console.error(error);
           if (error.response.data && error.response.data.errors) {
@@ -49,7 +60,8 @@ export default {
       }
   },
   components:{
-    PostsForm
+    PostsForm,
+    Loading
   }
 }
 </script>
@@ -60,4 +72,6 @@ export default {
  background: rgba(var(--b3f, 250, 250, 250), 1);
  text-align:center;
 }
+
+
 </style>
