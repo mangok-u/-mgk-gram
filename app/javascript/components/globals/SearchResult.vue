@@ -52,7 +52,7 @@
  &-list{
    max-height:400px;
    overflow: scroll;
-   &-row{
+  &-row{
     width:100%;
     height:62px;
     border-bottom: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
@@ -85,10 +85,16 @@
         }
       }
     }
-    }
+  }
  }
 }
 
+.search-result-list-row a{
+  width:100%;
+  height:100%;
+  display: flex;
+  align-items: center;
+}
 
 
 
