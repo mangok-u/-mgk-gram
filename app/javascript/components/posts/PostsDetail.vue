@@ -21,7 +21,9 @@
       </div>
     </div>
     <div class="posts-detail-image">
-      <img :src="post.image" @load="imageLoaded">
+      <template name="fade">
+        <img :src="post.image" @load="imageLoaded" v-show="!isImgLoading">
+      </template>
       <div class="posts-detail-image-loading" v-show="isImgLoading">
         <LoadingMin></LoadingMin>
       </div>
@@ -43,11 +45,9 @@
     </div>
     <div class="posts-detail-text">
       <div class="posts-detail-text-box">
-        <!-- <p class="posts-detail-text-box-user"> -->
         <router-link :to="{ name: 'Profile', params: { id: user.id } } ">
           {{user.user_name}}
         </router-link>
-        <!-- </p> -->
         <p class="posts-detail-text-box-text">
           {{firstText}}
         </p>
@@ -337,4 +337,16 @@ export default {
       }
     }
   }
+
+.fade-enter-active {
+  transition: opacity 4s ease-in-out;
+}
+
+.fade-enter-to {
+  opacity: 1;
+}
+
+.fade-enter {
+  opacity: 0;
+}
 </style>
