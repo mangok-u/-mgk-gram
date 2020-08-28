@@ -46,18 +46,19 @@ export default {
   },
   mounted () {
     axios
-      .get(`/api/v1/posts/${this.$route.params.id}.json`)
+      .get(`/api/v1/posts/${this.$route.params.post_id}.json`)
       .then(response => (this.post = response.data))
   },
-  beforeUpdate(){
-     axios
-      .get(`/api/v1/posts/${this.$route.params.id}.json`)
-      .then(response => (this.post = response.data))
-  },
+  // beforeUpdate(){
+  //    axios
+  //     .get(`/api/v1/posts/${this.$route.params.post_id}.json`)
+  //     .then(response => (this.post = response.data))
+  // },
   methods:{
     deletePost(){
+      console.log('hoge')
       axios
-       .delete(`/api/v1/posts/${this.$route.params.id}`)
+       .delete(`/api/v1/posts/${this.$route.params.post_id}`)
         .then(response => {
            this.$router.push({path: '/'});
            this.$emit('isFalse',false);

@@ -38,7 +38,7 @@ const router = new Router({
         }),
         children:[
           {
-            path: 'photo/:id(\\d+)',
+            path: 'photo/:post_id(\\d+)',
             name:'Photodetail',
             components:{
               profile: Photodetail,

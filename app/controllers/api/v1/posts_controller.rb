@@ -53,7 +53,7 @@ class Api::V1::PostsController < ApiController
   end
 
   def destroy
-  
+    @post.mgk_image.purge
     @post.destroy!
     head :no_content
   end

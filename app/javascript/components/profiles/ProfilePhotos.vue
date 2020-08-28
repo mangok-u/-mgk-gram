@@ -2,7 +2,7 @@
   <div  id="profile-photos">
     <div class="profile-photos">
       <div class="photo-box" v-for="post in user.posts" :key="post.id">
-         <router-link  :to="{ name: 'Photodetail', params: { id: post.id } }">
+         <router-link  :to="{ name: 'Photodetail', params: { post_id: post.id } }">
            <img @click="openDetail" :src="post.image" >
           </router-link>
       </div>  

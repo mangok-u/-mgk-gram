@@ -8,6 +8,7 @@
             <LoadingMin></LoadingMin>
           </div>
           <img v-else class="posts-detail-header-left-icon_box-icon" :src="damyIcon" @load="iconLoaded">
+          
         </div> 
         <p class="posts-detail-header-left-name">
           <router-link :to="{ name: 'Profile', params: { id: user.id } } ">
@@ -203,7 +204,7 @@ export default {
       this.isImgLoading=false;
     },
     iconLoaded(){
-      this.isImgLoading=false;
+      this.isIconLoading=false;
     }
     
     
