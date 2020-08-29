@@ -76,7 +76,6 @@ export default {
        post:{
          text:'',
          likes:[
-
          ]
          },   //オプションで使う値はすべて先に定義
        user:{},
@@ -96,10 +95,8 @@ export default {
     axios
       .get(`/api/v1/posts/${this.id}.json`)
       .then(response => {
-
         this.post = response.data
         this.user = this.post.user
-       
       })
       
         
@@ -108,7 +105,6 @@ export default {
   beforeUpdate(){   //mountedと一緒にしていると、空のtextに
     this.checkArray
     this.checkLiked();
-  
   },
   computed:{
     firstText(){
@@ -205,6 +201,9 @@ export default {
     },
     iconLoaded(){
       this.isIconLoading=false;
+    },
+    loaded(value){
+      this.value=false;
     }
     
     

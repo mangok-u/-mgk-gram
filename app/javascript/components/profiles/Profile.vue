@@ -32,7 +32,7 @@ export default{
       .get(`/api/v1/users/${this.id}.json`)
       .then(response => {
         this.user = response.data 
-        console.log(response.data )
+     
         // this.follower_info=response.data.follower_info
       })
    },

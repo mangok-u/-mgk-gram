@@ -1,9 +1,6 @@
 <template>
   <div class="posts-new">
     <posts-form :errors="errors"  :post="post" @submittt="createPost"></posts-form>
-    <!-- <div  v-show="isLoading" class="loading-container">
-      <vue-loading type="spin" color="#333" :size="{ width: '50px', height: '50px' }"></vue-loading>
-    </div> -->
     <Loading v-show="isLoading"></Loading>
   </div>
 </template>

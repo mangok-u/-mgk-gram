@@ -13,7 +13,6 @@
           <div class="form-box-img">
             <img  v-if="id >= 0" :src="post.image">
             <img v-else-if="imgSrc !==''" :src="imgSrc">
-              <!-- imgが無いときにから表示を防ぐ -->
             <div @click="selectFile">画像を更新する</div>
             <input  name="uploadedImage" type="file" accept="image/*" ref="file" placeholder="画像を更新する" v-on:change="onFileChange()" id="select-file">
           </div>

@@ -24,17 +24,14 @@ export default {
       .get(`/api/v1/posts/${this.$route.params.id}.json`)
       .then(response => (this.post = response.data))
 
-    console.log(this.id);
   },//編集画面に表示さセルため
   methods: {
     updatePost: function() {
       axios
-      //patchな
         .patch(`/api/v1/posts/${this.post.id}`, this.post)
         .then(response => {
           let e = response.data;
           this.$router.push({path: '/'});
-          //上記に遷移
         })
         .catch(error => {
           console.error(error);

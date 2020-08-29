@@ -24,22 +24,10 @@ export default{
    },
   data(){
     return{
-      // posts:[],
-  
+
       isTouched:false
     }
   },
-  // mounted(){
-  //   axios
-  //     .get('/api/v1/posts.json')
-  //     .then(response => (this.posts = response.data))
-  //     //jsonをデーター型に合わせるのが鍵
-  // },
-  // beforeUpdate(){
-  //   axios
-  //     .get('/api/v1/posts.json')
-  //     .then(response => (this.posts = response.data))
-  // },
   methods:{
    
     openDetail(){

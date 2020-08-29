@@ -28,10 +28,7 @@ export default {
       .get('/api/v1/posts.json')
       .then(response => {
         this.posts = response.data
-        let vm=this
-        // setTimeout(()=>{
-          vm.isLoading=false
-        // },2000);
+        this.isLoading=false
       })
   },
   updated(){
@@ -49,7 +46,6 @@ export default {
 #posts-index{
  padding-top:60px;
  background: rgba(var(--b3f, 250, 250, 250), 1);
-//  text-align:center;
  
 }
 .posts-index{

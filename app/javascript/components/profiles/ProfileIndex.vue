@@ -57,7 +57,7 @@ export default{
      following:Number,
      posts:Array,
      following_info:Array, //むしろ中のkeyは必要ない！！！！１
-     follower_info:Array
+     follower_info:Array,
     },
   },
   data(){
@@ -155,9 +155,7 @@ export default{
       onFileChange() {
         let file = event.target.files[0] || event.dataTransfer.files
         let reader = new FileReader()
-
           reader.onload = () => {
-            
               this.uploadedImage = event.target.result
               this.user.image = this.uploadedImage
             }
@@ -198,13 +196,6 @@ export default{
         }else{
           return String(val)
         }
-       
-        // if (val>=10000){
-        //   let reduceNum=Math.round(val * 100)/10
-        //   let newVal=String(reduceNum).slice(0,2);
-        //   let finalVal=newVal.slice(0,1)+ '.' +newVal.slice(1)
-        //   return finalVal+'万'
-        // }
       }
     },
   

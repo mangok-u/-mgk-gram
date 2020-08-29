@@ -5,8 +5,8 @@ class Api::V1::UsersController < ApiController
       @user = User.find_by(uid: params[:uid])
       render json: @user, serializer: UserSerializer
     else 
-      @users = User.all
-      render json: @users
+      # @users = User.all
+      # render json: @users
     end
   end
 
@@ -16,7 +16,7 @@ class Api::V1::UsersController < ApiController
       render json: @user, serializer: UserSerializer
     else 
       @users = User.all
-      render json: @users
+      render json: @user
     end
   end
 

@@ -12,10 +12,19 @@
           <div class="search-wrapper" v-if="isSearched" @click="removeResult"></div> 
       </div>
       <ul class="header-right">
-        <li class="header-right_icon" ><router-link to="/posts/new">post</router-link></li>
-        <li @click="logout" class="header-right_icon">Logout</li>
-        <li class="header-right_icon">#</li>
-        <li class="header-right_icon">#</li>
+        <li class="header-right_icon" >
+          <router-link to="/posts/new">
+            <font-awesome-icon  icon="image"></font-awesome-icon>
+          </router-link>
+        </li>
+        <li class="header-right_icon">
+          <router-link :to="{ name: 'Profile', params: { id: currentUser.id } } ">
+            <font-awesome-icon  icon="home"></font-awesome-icon>
+          </router-link>
+        </li>
+        <li @click="logout" class="header-right_icon">
+          <font-awesome-icon  icon="user-circle"></font-awesome-icon>
+        </li>
       </ul>
     </div>
   </div>
@@ -35,6 +44,7 @@ data(){
      follower_gteq:"",
     },
     users:[],
+    currentUser:this.$store.state.currentUser,
     isSearched:false
   }
 },
