@@ -22,9 +22,12 @@
             <font-awesome-icon  icon="home"></font-awesome-icon>
           </router-link>
         </li>
-        <li @click="logout" class="header-right_icon">
+        <li @click="showChoice" class="header-right_icon">
           <font-awesome-icon  icon="user-circle"></font-awesome-icon>
         </li>
+        <div id="user-choice" v-show="isTouched" >
+            <!-- <SearchResult :users="users" @getFalse="removeResult" ></SearchResult> -->
+        </div>
       </ul>
     </div>
   </div>
@@ -45,21 +48,25 @@ data(){
     },
     users:[],
     currentUser:this.$store.state.currentUser,
-    isSearched:false
+    isSearched:false,
+    isTouched:false
   }
 },
 methods:{
-  logout(){
-    firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          this.$store.commit("setUser", null);
-          this.$router.push("/user/login");
-        })
-        .catch(error => {
-          console.log(error);
-        });
+  // logout(){
+  //   firebase
+  //       .auth()
+  //       .signOut()
+  //       .then(() => {
+  //         this.$store.commit("setUser", null);
+  //         this.$router.push("/user/login");
+  //       })
+  //       .catch(error => {
+  //         console.log(error);
+  //       });
+  // },
+  showChoice(){
+    this.isTouched=true;
   },
   search(){
 
@@ -157,9 +164,20 @@ components:{
       }
     }
    &-right{
-    display:inline-flex;   
+    display:inline-flex;
+    // position:relative;   
     &_icon{
       margin-left:20px;
+    }
+    #user-choice{
+      position:absolute;
+      top:60px;
+      right:0px;
+      width:220px;
+      height:150px;
+      border-radius: 5px;
+      background:black;
+      z-index:10;
     }
 }
 }
