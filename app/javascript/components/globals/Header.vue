@@ -18,7 +18,7 @@
           </router-link>
         </li>
         <li class="header-right_icon">
-          <router-link :to="{ name: 'Profile', params: { id: currentUser.id } } ">
+          <router-link to="/">
             <font-awesome-icon  icon="home"></font-awesome-icon>
           </router-link>
         </li>
@@ -26,8 +26,9 @@
           <font-awesome-icon  icon="user-circle"></font-awesome-icon>
         </li>
         <div id="user-choice" v-show="isTouched" >
-            <!-- <SearchResult :users="users" @getFalse="removeResult" ></SearchResult> -->
+            <UserChoice :currentUser="currentUser" @getFalse="removeChoice"></UserChoice>
         </div>
+        <div class="user-choice-wrapper" v-show="isTouched" @click="removeChoice"></div>
       </ul>
     </div>
   </div>
@@ -38,6 +39,7 @@
 import firebase from 'firebase'
 import axios from 'axios';
 import SearchResult from "./SearchResult"
+import UserChoice from "./UserChoice"
 import Qs from 'qs'
 export default{
 
@@ -66,7 +68,14 @@ methods:{
   //       });
   // },
   showChoice(){
-    this.isTouched=true;
+    if(this.isTouched===false){
+      this.isTouched=true;
+    }else{
+      this.removeChoice
+    }
+  },
+  removeChoice(){
+    this.isTouched=false;
   },
   search(){
 
@@ -97,7 +106,8 @@ methods:{
   }
 },
 components:{
- SearchResult
+ SearchResult,
+ UserChoice
 }
 
 }
@@ -125,7 +135,7 @@ components:{
   display:flex;
   letter-spacing: 1.2px;
   font-size:1.6rem;
-  // position: relative;
+  position: relative;
   &-left{
     width:30%;
     &_name{
@@ -172,12 +182,16 @@ components:{
     #user-choice{
       position:absolute;
       top:60px;
-      right:0px;
-      width:220px;
-      height:150px;
-      border-radius: 5px;
-      background:black;
+      right:-5%;
       z-index:10;
+    }
+    .user-choice-wrapper{
+      position:fixed;
+      width:100%;
+      height:100%;
+      top:0;
+      left:0;
+      z-index:0
     }
 }
 }
