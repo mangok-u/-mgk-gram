@@ -58,6 +58,7 @@ export default{
   }
   #profile-photos{
     width:100%;
+    background-color: rgba(var(--b3f,250,250,250),1); 
     
   }
   #wrapper-mask{
@@ -82,6 +83,8 @@ export default{
     background: white;
     height:600px;
   }
+
+
   .profile-photos{
     width:90%;
     max-width:970px;

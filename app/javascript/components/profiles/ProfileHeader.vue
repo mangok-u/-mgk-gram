@@ -1,19 +1,23 @@
 <template>
   <div id="profile-header">
-    <ul class="profile-header">
-      <li class="profile-header-li">投稿</li>
-      <li class="profile-header-li">MGKTV</li>
-      <li class="profile-header-li">保存済み</li>
-      <li class="profile-header-li">タグ付けされている人</li>
-    </ul>
+    <div class="profile-header"></div>
+      <ul class="profile-header-box">
+        <li class="profile-header-box-li">投稿</li>
+        <li class="profile-header-box-li">MGKTV</li>
+        <li class="profile-header-box-li">保存済み</li>
+        <li class="profile-header-box-li">タグ付けされている人</li>
+      </ul>
   </div>
 
 
 </template>
 
 <style scoped lang="scss">
+
 #profile-header{
-  height:60px;
+background-color: rgba(var(--b3f,250,250,250),1); 
+}
+.profile-header{
   width:90%;
   margin:0 auto;
   max-width:970px;
@@ -21,9 +25,10 @@
 
 }
 
-.profile-header{
-  width:45%;
-  height:100%;
+.profile-header-box{
+  width:80%;
+  height:60px;
+  max-width: 380px;
   display:flex;
   align-items: center;
   justify-content: space-between;

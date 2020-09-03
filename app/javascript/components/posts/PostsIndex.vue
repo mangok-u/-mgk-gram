@@ -3,7 +3,7 @@
     <div class="posts-index">
       <div class="posts-index-area">
         <div class="posts-index-area-box" v-for="post in posts" :key="post.id">
-          <PostsDetail :id="post.id"></PostsDetail>
+          <PostsDetail class ="ddd" :id="post.id"></PostsDetail>
         </div>
       </div>
     </div>
@@ -56,7 +56,12 @@ export default {
     margin:0 auto;
     &-box{
       width:100%;
+      &:not(:last-child){
+        margin-bottom:70px;
+      }
     }
   }
 }
+
+
 </style>

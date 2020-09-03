@@ -1,65 +1,67 @@
 <template>
-  <div class="posts-detail">
-    <div class="posts-detail-header">
-      <div class="posts-detail-header-left">
-        <div class="posts-detail-header-left-icon_box">
-          <img v-if="user.image!=null" class="posts-detail-header-left-icon_box-icon" :src="user.image" @load="iconLoaded">
-          <div class="posts-detail-header-left-icon_box-loading" v-else-if="isIconLoading">
-            <LoadingMin></LoadingMin>
-          </div>
-          <img v-else class="posts-detail-header-left-icon_box-icon" :src="damyIcon" @load="iconLoaded">
-          
-        </div> 
-        <p class="posts-detail-header-left-name">
+ 
+    <div class="posts-detail">
+      <div class="posts-detail-header">
+        <div class="posts-detail-header-left">
+          <div class="posts-detail-header-left-icon_box">
+            <img v-if="user.image!=null" class="posts-detail-header-left-icon_box-icon" :src="user.image" @load="iconLoaded">
+            <div class="posts-detail-header-left-icon_box-loading" v-else-if="isIconLoading">
+              <LoadingMin></LoadingMin>
+            </div>
+            <img v-else class="posts-detail-header-left-icon_box-icon" :src="damyIcon" @load="iconLoaded">
+            
+          </div> 
+          <p class="posts-detail-header-left-name">
+            <router-link :to="{ name: 'Profile', params: { id: user.id } } ">
+              {{user.user_name}}
+            </router-link>
+          </p>
+        </div>
+        <div class="posts-detail-header-right">
+          •••
+        </div>
+      </div>
+      <div class="posts-detail-image">
+        <template name="fade">
+          <img :src="post.image" @load="imageLoaded" v-show="!isImgLoading">
+        </template>
+        <div class="posts-detail-image-loading" v-show="isImgLoading">
+          <LoadingMin></LoadingMin>
+        </div>
+      </div>
+      <div class="posts-detail-action">
+        <div class="posts-detail-action-left">
+          <button @click="like">
+            <font-awesome-icon :class="{liked: isLiked}"  icon="heart" disabled></font-awesome-icon>
+          </button>
+          <p>$</p>
+          <p>$</p>
+        </div>
+        <div class="posts-detail-action-right">
+          <p>$</p>
+        </div>
+      </div>
+      <div v-if="post.like_number>0" class="posts-detail-like">
+        <p>{{post.like_number}}人がいいねしました</p>
+      </div>
+      <div class="posts-detail-text">
+        <div class="posts-detail-text-box">
           <router-link :to="{ name: 'Profile', params: { id: user.id } } ">
             {{user.user_name}}
           </router-link>
-        </p>
-      </div>
-      <div class="posts-detail-header-right">
-        •••
-      </div>
-    </div>
-    <div class="posts-detail-image">
-      <template name="fade">
-        <img :src="post.image" @load="imageLoaded" v-show="!isImgLoading">
-      </template>
-      <div class="posts-detail-image-loading" v-show="isImgLoading">
-        <LoadingMin></LoadingMin>
+          <p class="posts-detail-text-box-text">
+            {{firstText}}
+          </p>
+          <p class="posts-detail-text-box-next" v-if="isArray" @click="showNext">続きを読む</p>
+        </div>
+        <template v-if="isNext">
+          <p class="posts-detail-text-box-all"  v-for="(text,index) in restText" :key="index">
+            {{text}}
+          </p>
+        </template>
       </div>
     </div>
-    <div class="posts-detail-action">
-      <div class="posts-detail-action-left">
-        <button @click="like">
-          <font-awesome-icon :class="{liked: isLiked}"  icon="heart" disabled></font-awesome-icon>
-        </button>
-        <p>$</p>
-        <p>$</p>
-      </div>
-      <div class="posts-detail-action-right">
-        <p>$</p>
-      </div>
-    </div>
-    <div v-if="post.like_number>0" class="posts-detail-like">
-      <p>{{post.like_number}}人がいいねしました</p>
-    </div>
-    <div class="posts-detail-text">
-      <div class="posts-detail-text-box">
-        <router-link :to="{ name: 'Profile', params: { id: user.id } } ">
-          {{user.user_name}}
-        </router-link>
-        <p class="posts-detail-text-box-text">
-          {{firstText}}
-        </p>
-        <p class="posts-detail-text-box-next" v-if="isArray" @click="showNext">続きを読む</p>
-      </div>
-      <template v-if="isNext">
-        <p class="posts-detail-text-box-all"  v-for="(text,index) in restText" :key="index">
-          {{text}}
-        </p>
-      </template>
-    </div>
-  </div>
+
 </template>
 
 <script>
@@ -220,14 +222,14 @@ export default {
   .liked{
    color:tomato;
   }
+  // #posts-detail{
+ 
   .posts-detail{
     width:100%;
     border: 1px solid rgba(var(--b6a,219,219,219),1);
     padding-bottom:20px;
     background:white;
-    &:not(:last-of-type){
-        margin-bottom:50px;
-        }
+   
     &-header{
       width:95%;
       height:50px;
