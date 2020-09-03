@@ -5,6 +5,7 @@
     <template v-if="isLogin">
       <Header></Header>
       <router-view></router-view>
+      <Footer></Footer>
     </template>
 
     <template v-else>
@@ -20,8 +21,9 @@
 import axios from 'axios';
 import firebase from 'firebase'
 import 'normalize.css'
-import Header from './components/globals/Header.vue' 
-import LoginPage from './components/sign/LoginPage.vue' 
+import Header from './components/globals/Header' 
+import Footer from './components/globals/Footer' 
+import LoginPage from './components/sign/LoginPage'
 
 export default{
   data(){
@@ -64,7 +66,8 @@ export default{
   },
   components:{
     LoginPage,
-    Header
+    Header,
+    Footer
   },
   
   

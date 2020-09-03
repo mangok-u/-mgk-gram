@@ -7,7 +7,7 @@
         </div>
       </div>
     </div>
-    <Loading v-if="isLoading"></Loading>
+    <Loading v-show="isLoading"></Loading>
   </div>
 </template>
 

@@ -223,9 +223,11 @@ export default {
   .posts-detail{
     width:100%;
     border: 1px solid rgba(var(--b6a,219,219,219),1);
-    margin-bottom:50px;
     padding-bottom:20px;
     background:white;
+    &:not(:last-of-type){
+        margin-bottom:50px;
+        }
     &-header{
       width:95%;
       height:50px;

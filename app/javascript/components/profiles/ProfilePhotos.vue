@@ -58,7 +58,6 @@ export default{
   }
   #profile-photos{
     width:100%;
-    height:200px;
     
   }
   #wrapper-mask{
