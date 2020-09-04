@@ -20,5 +20,5 @@ Rails.application.routes.draw do
 
 
   #本番環境のエラーを止める
-  get '*path' => 'home#index'
+  # get '*path' => 'home#index'
 end
