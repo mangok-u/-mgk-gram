@@ -57,7 +57,7 @@ export default {
     &-box{
       width:100%;
       &:not(:last-child){
-        margin-bottom:70px;
+        margin-bottom:50px;
       }
     }
   }

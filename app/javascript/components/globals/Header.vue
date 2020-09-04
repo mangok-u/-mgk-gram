@@ -5,7 +5,7 @@
         <h2 class="header-left_name" ><router-link to="/">Mgkgram</router-link></h2>
       </div>
       <div class="header-center">
-        <input class="search-input" @input="search" type="number" v-model="params.follower_gteq" placeholder="フォロワー数で検索">
+        <input id="search-input" @input="search" type="number" v-model="params.follower_gteq" placeholder="フォロワー数で検索">
           <div id="search-result" v-if="isSearched" >
             <SearchResult :users="users" @getFalse="removeResult" ></SearchResult>
           </div>
@@ -77,10 +77,10 @@ methods:{
   removeChoice(){
     this.isTouched=false;
   },
-  search(){
+  search(e){
 
     // this.params.follower_gteq=Number(this.params.follower_gteq);
-    console.log(this.params.follower_gteq)
+    console.log(e.target.value)
     axios
       .get('/api/v1/users/search.json',{params:{
         q:this.params
@@ -93,16 +93,20 @@ methods:{
           console.log(response);
           this.isSearched=true;
           this.users=response.data
+          e.target.reset();
 
         })
         .catch((error) => {
           console.log(error);
-          this.notify(error.message);
+          // this.notify(error.message);
         })
 
   },
   removeResult(){
-    this.isSearched=false
+    this.isSearched=false;
+    this.params.follower_gteq=""
+
+   
   }
 },
 components:{
@@ -147,7 +151,7 @@ components:{
     }
     &-center{
         position:relative;
-      .search-input{
+      #search-input{
         width:200px;
         font-size:1.2rem;
         color:rgba(var(--b6a, 219, 219, 219), 1);
