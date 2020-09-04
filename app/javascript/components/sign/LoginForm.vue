@@ -2,6 +2,11 @@
     <div class="login-form">
         <div class="login-form-box">
           <h2 class="login-form-box-title">Mgkgram</h2>
+           <div class="form-error" v-if="errors.length != 0">
+            <ul v-for="e in errors" :key="e">
+              <li><font color="red">{{ e }}</font></li>
+            </ul>
+          </div>
           <div class="login-form-box-form">
             <form >   
               <div class="login-form-box-form-email">
@@ -40,11 +45,13 @@ export default{
   data(){
     return{
       email:"",
-      password:""
+      password:"",
+      errors:[]
     }
   },
    methods: {
     login: function () {
+       this.errors=[]
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
@@ -53,6 +60,8 @@ export default{
         })
          .catch(err=>{
             console.log(err)
+            this.errors.push(err)
+             console.log(this.errors)
         })
     }
   }

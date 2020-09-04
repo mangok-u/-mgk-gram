@@ -15,6 +15,11 @@
                 <p>または</p>
                 <div></div>
               </div>  
+              <div class="form-error" v-if="errors.length != 0">
+                <ul v-for="e in errors" :key="e">
+                  <li><font color="red">{{ e }}</font></li>
+                </ul>
+              </div>
               <div class="signup-form-box-form-email">
                 <input type="email" v-model="email" placeholder="携帯電話番号またはメールアドレス" >
               </div>
@@ -50,11 +55,13 @@ export default{
         email:"",
         fullname:"",
         username:"",
-        password:""
+        password:"",
+        errors:[]
     }
   },
   methods:{
     submit: function() {
+       this.errors=[]
        firebase
         .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
@@ -70,6 +77,11 @@ export default{
                 this.$router.push({path: '/'});
                 });
           })
+          .catch(err=>{
+            console.log(err)
+            this.errors.push(err)
+             console.log(this.errors)
+            })
          }
     }
 }
