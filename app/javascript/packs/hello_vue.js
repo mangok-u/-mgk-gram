@@ -32,16 +32,17 @@ Vue.use(ElementUI, { locale })
 
 // import '../plugins'
 
+debugger
  //普通にnpminstall de行けた
 const config = {
-  apiKey: "AIzaSyDxmb4KQEh-naza2Dt-a48_jFwGf6UQDg8",
-    authDomain: "mgkgram.firebaseapp.com",
-    databaseURL: "https://mgkgram.firebaseio.com",
-    projectId: "mgkgram",
-    storageBucket: "mgkgram.appspot.com",
-    messagingSenderId: "567636004445",
-    appId: "1:567636004445:web:2520afdff18b8d7bf987b4"
-};
+    apiKey:  process.env.APIKEY,
+    authDomain: process.env.AUTHDOMAIN,
+    databaseURL: process.env.DATABASEURL,
+    projectId: process.env.PROJECTID,
+    storageBucket: process.env.STORAGEBUCKET,
+    messagingSenderId: process.env.MESSAGINGSENDERID,   //これは""が必要なのでcredencial編集で"""
+    appId: process.env.APPID
+      };
 
 Vue.use(Vuex);
 // plugins: [
