@@ -32,7 +32,7 @@ Vue.use(ElementUI, { locale })
 
 // import '../plugins'
 
-debugger
+
  //普通にnpminstall de行けた
 const config = {
     apiKey:  process.env.APIKEY,
