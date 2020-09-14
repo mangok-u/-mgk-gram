@@ -20,7 +20,7 @@
 <script>
 import axios from 'axios';
 import firebase from 'firebase'
-import 'normalize.css'
+// import 'normalize.css'
 import Header from './components/globals/Header' 
 import Footer from './components/globals/Footer' 
 import LoginPage from './components/sign/LoginPage'
@@ -80,6 +80,7 @@ export default{
 
 *{
   box-sizing:border-box;
+  margin:0;
 }
 html{
   font-size:62.5%;

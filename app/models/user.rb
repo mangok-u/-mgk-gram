@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :follower_info,class_name: "Follow",foreign_key: "follower_id"
   has_one_attached :icon
   attr_accessor :image
+  
   def parse_base64(image)
     if image.present? || rex_image(image) == ''
       content_type = create_extension(image)
