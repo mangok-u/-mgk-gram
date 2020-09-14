@@ -88,6 +88,7 @@ export default{
   .profile-photos{
     width:90%;
     max-width:970px;
+    min-height:330px;
     display:flex;
     flex-wrap:wrap;
     justify-content: start;

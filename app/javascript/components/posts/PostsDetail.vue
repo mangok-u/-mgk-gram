@@ -17,7 +17,7 @@
         </p>
       </div>
       <div class="posts-detail-header-right">
-        •••
+      
       </div>
     </div>
     <div class="posts-detail-image">
@@ -35,7 +35,7 @@
         </button>
       </div>
       <div class="posts-detail-action-right">
-        <p>$</p>
+       
       </div>
     </div>
     <div v-if="post.like_number>0" class="posts-detail-like">

@@ -3,10 +3,10 @@
     <div class="photo-detail">
       <div class="header">
         <div class="header-left">
-          <p >run_goku</p>
+          <p>{{post.user.user_name}}</p>
         </div>
         <div class="header-right">
-          <p @click="openModal">…</p>
+          <p @click="openModal" v-if="currentUser.id==post.user.id">…</p>
         </div>
       </div>
       <div class="photo-detail-img">
@@ -41,7 +41,8 @@ export default {
   data: function () {
     return {
       post: {},
-      isTouched:false
+      isTouched:false,
+      currentUser:this.$store.state.currentUser
     }
   },
   mounted () {
