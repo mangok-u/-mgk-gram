@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApiController
 
+ 
   def index
     if params[:uid] 
       @user = User.find_by(uid: params[:uid])

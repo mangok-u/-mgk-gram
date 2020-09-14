@@ -44,7 +44,7 @@ export default{
         } else {
             this.$store.commit("setUser", null)
             this.isLogin=false;
-            console.log(this.user)
+           
         }
     });
 
@@ -58,9 +58,11 @@ export default{
             console.log("ログインしているユーザー:", data)
             this.$store.commit("setUser", data)
             this.user=this.$store.state.currentUser
+             this.isLogin=true;
             console.log(this.user)
         } else {
             this.$store.commit("setUser", null)
+             this.isLogin=false;
         }
     });
   },

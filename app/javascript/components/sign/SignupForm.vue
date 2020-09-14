@@ -82,10 +82,18 @@ export default{
                   password: this.password
                 };
                 axios.post("/api/v1/users",{ user }).then(() => {
-                 this.isLoading=false;
-                this.$router.push({path: '/'});
+                  firebase
+                  .auth()
+                  .signInWithEmailAndPassword(user.email, user.password)
+                  .then(()=>{
+                    debugger
+                      this.isLoading=true
+                      this.$router.push("/");
+                     })
+                // this.isLoading=false;
+                // this.$router.push({path: '/'});
                 });
-           },1500)
+           },0)
           })
           .catch(err=>{
              setTimeout(()=>{

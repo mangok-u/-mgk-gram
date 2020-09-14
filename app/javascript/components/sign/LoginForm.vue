@@ -63,7 +63,7 @@ export default{
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(()=>{
-             this.isLoading=true
+             this.isLoading=false
              this.$router.push("/");
         })
          .catch(err=>{
