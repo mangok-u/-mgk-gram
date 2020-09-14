@@ -37,7 +37,7 @@ export default {
       axios
         .post('/api/v1/posts', this.post)
         .then(response => {
-            this.isLoading=false;
+          this.isLoading=false;
           let e = response.data;
           this.$router.push({path: '/'});
           //上記に遷移

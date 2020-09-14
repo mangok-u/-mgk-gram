@@ -33,12 +33,14 @@
           <p>アカウントをお待ちでないですか？</p>
           <router-link to="/user/signup">登録する</router-link>
         </div>
+        <Loading v-show="isLoading"></Loading>
       </div>
 </template>
 
 <script>
 import firebase from 'firebase'
 import axios from 'axios';
+import Loading from '../../Loading.vue'
 
 export default{
 
@@ -46,19 +48,27 @@ export default{
     return{
       email:"",
       password:"",
-      errors:[]
+      errors:[],
+      isLoading:false,
     }
+  },
+  components:{
+     Loading
   },
    methods: {
     login: function () {
+       this.isLoading=true
        this.errors=[]
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(()=>{
+             this.isLoading=true
              this.$router.push("/");
         })
          .catch(err=>{
+            this.isLoading=false
+            alert('ログイン失敗')
             console.log(err)
             this.errors.push(err)
              console.log(this.errors)

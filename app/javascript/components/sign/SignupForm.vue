@@ -42,6 +42,7 @@
           <p>アカウントをお待ちですか？</p>
           <router-link to="/user/login">ログインする</router-link>
         </div>
+      <Loading v-show="isLoading"></Loading>
       </div>
 </template>
 
@@ -49,6 +50,7 @@
 import firebase from 'firebase'
 //この記述！！！！
 import axios from 'axios';
+import Loading from '../../Loading.vue'
 export default{
   data(){
     return{
@@ -56,17 +58,23 @@ export default{
         fullname:"",
         username:"",
         password:"",
-        errors:[]
+        errors:[],
+        isLoading:false,
     }
+  },
+  components:{
+     Loading
   },
   methods:{
     submit: function() {
+       this.isLoading=true
        this.errors=[]
        firebase
         .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
            .then(res => {
-            const user = {
+           setTimeout(()=>{
+              const user = {
                   email: res.user.email,
                   full_name: this.fullname,
                   user_name:this.username,
@@ -74,13 +82,20 @@ export default{
                   password: this.password
                 };
                 axios.post("/api/v1/users",{ user }).then(() => {
+                 this.isLoading=false;
                 this.$router.push({path: '/'});
                 });
+           },1500)
           })
           .catch(err=>{
+             setTimeout(()=>{
+              this.isLoading=false;
+             alert('新規登録失敗')
             console.log(err)
             this.errors.push(err)
              console.log(this.errors)
+           },1500)
+            
             })
          }
     }
