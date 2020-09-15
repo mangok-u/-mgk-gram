@@ -8,7 +8,7 @@
 <script>
 import axios from 'axios';
 import PostsForm from './PostsForm.vue'
-import Loading from '../../Loading.vue'
+import Loading from '../parts/Loading.vue'
 
 
 export default {

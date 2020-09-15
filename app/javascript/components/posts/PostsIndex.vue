@@ -14,7 +14,7 @@
 <script>
 import axios from 'axios';
 import PostsDetail from './PostsDetail.vue'
-import Loading from '../../Loading.vue'
+import Loading from '../parts/Loading.vue'
 
 export default {
   data: function () {

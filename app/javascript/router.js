@@ -5,12 +5,12 @@ import firebase from 'firebase'
 
 
 import Profile from './components/profiles/Profile.vue'
+import Photodetail from './components/profiles/Photodetail.vue'
 // import PostsDetail from './components/posts/PostsDetail.vue'
 import PostsNew from './components/posts/PostsNew.vue'
 import PostsEdit from './components/posts/PostsEdit.vue'
 import PostsIndex from './components/posts/PostsIndex.vue'
 import LoginForm from "./components/sign/LoginForm.vue"
-import Photodetail from 'Photodetail.vue'
 import SignupForm  from "./components/sign/SignupForm.vue"
 import LoginPage  from "./components/sign/LoginPage.vue"
 

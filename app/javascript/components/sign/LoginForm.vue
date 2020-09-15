@@ -40,7 +40,7 @@
 <script>
 import firebase from 'firebase'
 import axios from 'axios';
-import Loading from '../../Loading.vue'
+import Loading from '../parts/Loading.vue'
 
 export default{
 

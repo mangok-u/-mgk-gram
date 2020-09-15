@@ -62,7 +62,7 @@
 
 <script>
 import axios from 'axios';
-import LoadingMin from '../../LoadingMin.vue'
+import LoadingMin from '../parts/LoadingMin.vue'
 
 export default {
    

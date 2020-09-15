@@ -50,7 +50,7 @@
 import firebase from 'firebase'
 //この記述！！！！
 import axios from 'axios';
-import Loading from '../../Loading.vue'
+import Loading from '../parts/Loading.vue'
 export default{
   data(){
     return{
@@ -82,23 +82,20 @@ export default{
                   password: this.password
                 };
                 axios.post("/api/v1/users",{ user }).then(() => {
-                
-                      this.isLoading=true
-                      this.$router.push("/");
-                    
+                  this.isLoading=true
+                  this.$router.push("/")
                 });
-         
-          })
-          .catch(err=>{
-             setTimeout(()=>{
-              this.isLoading=false;
-             alert('新規登録失敗')
-            console.log(err)
-            this.errors.push(err)
-             console.log(this.errors)
-           },1500)
-            
             })
+            .catch(err=>{
+                setTimeout(()=>{
+                  this.isLoading=false;
+                alert('新規登録失敗')
+                console.log(err)
+                this.errors.push(err)
+                console.log(this.errors)
+              },1500)
+              
+              })
          }
     }
 }
