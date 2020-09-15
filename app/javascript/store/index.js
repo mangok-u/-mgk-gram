@@ -7,6 +7,7 @@ const store = () => {
     return new Vuex.Store({
         state: {
             currentUser:"",
+            loginInfo:""
         },
         mutations: {
             setUser(state, payload) {

@@ -73,7 +73,7 @@ export default{
         .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
            .then(res => {
-           setTimeout(()=>{
+           
               const user = {
                   email: res.user.email,
                   full_name: this.fullname,
@@ -82,18 +82,12 @@ export default{
                   password: this.password
                 };
                 axios.post("/api/v1/users",{ user }).then(() => {
-                  firebase
-                  .auth()
-                  .signInWithEmailAndPassword(user.email, user.password)
-                  .then(()=>{
-                    debugger
+                
                       this.isLoading=true
                       this.$router.push("/");
-                     })
-                // this.isLoading=false;
-                // this.$router.push({path: '/'});
+                    
                 });
-           },0)
+         
           })
           .catch(err=>{
              setTimeout(()=>{
