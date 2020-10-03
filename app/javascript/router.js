@@ -23,13 +23,6 @@ const router = new Router({
     { path: '/',
     name: 'PostsIndex',
     component: PostsIndex    },
-  //   { path: '/profile:id(\\d+)',
-  //     components:{
-  //       default:Profile 
-  //       // login: LoginForm 
-  //     },
-    
-  // },
     { path: '/profile/:id(\\d+)',
         name: 'Profile',
         component: Profile ,
@@ -46,10 +39,7 @@ const router = new Router({
           }
         ]  
       },
-   
-    // { path: '/posts/:id(\\d+)',  // :id は数値のみに制限する
-    //   name: 'PostsDetail',
-    //   component: PostsDetail  },
+  
     { path: '/posts/new',
       name: 'PostsNew',
       component: PostsNew    },
@@ -89,21 +79,7 @@ const router = new Router({
         }
       ]
     }
-    //  },
-    //   { path: '/user/login',  // :id は数値のみに制限する
-    //   name: 'LoginForm',
-    //   components: {//複数系にすると呼び出せる！！
-    //     default: LoginForm 
-    //   } },
-    //   { path: '/user/signup', 
-    //   name: 'SignupForm',
-    //   components: {
-    //     // login: SignupForm 
-    //     default: SignupForm 
-    //   } },
-    
-
-    
+ 
   ]
   //   router
 })

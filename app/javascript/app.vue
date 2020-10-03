@@ -1,5 +1,4 @@
 <template>
-  <!-- <div v-if="this.user.id<=1" > -->
   <div id="app">
    
     <template v-if="isLogin">
@@ -12,9 +11,6 @@
       <router-view name="noAuth"></router-view>
     </template>
   </div>
-
-  <!-- <router-view v-else name="login"></router-view> -->
- 
 </template>
 
 <script>
@@ -32,6 +28,8 @@ export default{
       isLogin:false
     }
   },
+
+
   mounted(){
     firebase.auth().onAuthStateChanged(async user => {
         if (user) {
@@ -50,8 +48,6 @@ export default{
 
   },
   created(){
-    console.log('hoge')
-    
     firebase.auth().onAuthStateChanged(async user => {
         if (user) {
             const { data } = await axios.get(`api/v1/users?uid=${user.uid}`)

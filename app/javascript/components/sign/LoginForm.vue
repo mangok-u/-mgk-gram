@@ -10,10 +10,10 @@
           <div class="login-form-box-form">
             <form >   
               <div class="login-form-box-form-email">
-                <input v-model="email" type="text">
+                <input v-model="email" type="text" placeholder="email">
               </div>
               <div class="login-form-box-form-password">
-                <input v-model="password" type="password">
+                <input v-model="password" type="password" placeholder="password">
               </div>
               <div class="login-form-box-form-submit">
                 <button @click="login" type="submit">ログイン</button>

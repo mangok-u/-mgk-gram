@@ -9,10 +9,7 @@ class Api::V1::PostsController < ApiController
 
   def index
     # @posts = Post.with_attached_mgk_image
-   
     @posts = Post.with_attached_mgk_image.order(id: "desc")
-
-    
     render json: @posts, each_serializer: PostSerializer
     # 配列持って来てる時はこれ
   end

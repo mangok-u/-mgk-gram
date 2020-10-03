@@ -82,18 +82,20 @@ export default{
                   password: this.password
                 };
                 axios.post("/api/v1/users",{ user }).then(() => {
-                  this.isLoading=true
-                  this.$router.push("/")
+                    this.isLoading=false
+                    this.$router.push("/")
+                 
+                  
                 });
             })
             .catch(err=>{
-                setTimeout(()=>{
-                  this.isLoading=false;
+                
+                this.isLoading=false;
                 alert('新規登録失敗')
                 console.log(err)
                 this.errors.push(err)
                 console.log(this.errors)
-              },1500)
+       
               
               })
          }
